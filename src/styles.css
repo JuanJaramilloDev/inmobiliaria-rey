@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --black: #0c0e0d;
+  --dark: #111413;
+  --card: #181b19;
+
+  --gold: #d4af37;
+  --gold-light: #e1c15a;
+  --gold-border: rgba(212, 175, 55, 0.28);
+
+  --white: #f1f0eb;
+  --gray: #a5a6a1;
+
+  --whatsapp: #25d366;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  background: var(--black);
+
+  color: var(--white);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}

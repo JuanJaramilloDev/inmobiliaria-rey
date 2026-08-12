@@ -1,0 +1,62 @@
+<article class="property-card">
+
+  <div class="property-image">
+
+    <img
+      [src]="propiedad.imagen"
+      [alt]="propiedad.titulo"
+    >
+
+    <span class="property-operation">
+      {{ propiedad.operacion }}
+    </span>
+
+    @if (propiedad.destacada) {
+      <span class="property-featured">
+        Destacada
+      </span>
+    }
+
+  </div>
+
+  <div class="property-content">
+
+    <div class="property-location">
+      {{ propiedad.ubicacion }}
+    </div>
+
+    <h3>
+      {{ propiedad.titulo }}
+    </h3>
+
+    <p class="property-price">
+      {{ propiedad.precio | currency:'COP':'symbol-narrow':'1.0-0':'es-CO' }}
+    </p>
+
+    <div class="property-details">
+
+      <span>
+        <strong>{{ propiedad.habitaciones }}</strong>
+        Habitaciones
+      </span>
+
+      <span>
+        <strong>{{ propiedad.banos }}</strong>
+        Baños
+      </span>
+
+      <span>
+        <strong>{{ propiedad.area }}</strong>
+        m²
+      </span>
+
+    </div>
+
+    <a class="property-link">
+      Ver propiedad
+      <span>→</span>
+    </a>
+
+  </div>
+
+</article>

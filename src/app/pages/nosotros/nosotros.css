@@ -1,0 +1,314 @@
+.about-page {
+  min-height: 100vh;
+  padding: 80px 30px 100px;
+  background: #0c0e0d;
+}
+
+.about-container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+
+/* HERO */
+
+.about-hero {
+  min-height: 470px;
+
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+
+  align-items: center;
+
+  padding: 65px;
+
+  background: #151817;
+
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.section-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #d4af37;
+
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.about-content h1 {
+  margin: 0;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.about-content h1 em {
+  color: #d4af37;
+  font-style: normal;
+}
+
+.title-line {
+  width: 42px;
+  height: 2px;
+
+  margin-top: 18px;
+
+  background: #d4af37;
+}
+
+.about-content p {
+  max-width: 600px;
+
+  margin: 25px 0 0;
+
+  color: #858782;
+
+  font-size: 0.82rem;
+  line-height: 1.9;
+}
+
+
+/* SÍMBOLO */
+
+.about-symbol {
+  width: 220px;
+  height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  justify-self: center;
+
+  border: 1px solid rgba(212, 175, 55, 0.35);
+
+  border-radius: 50%;
+
+  color: #d4af37;
+
+  font-size: 5rem;
+
+  box-shadow:
+    0 0 0 25px rgba(212, 175, 55, 0.025),
+    0 0 0 50px rgba(212, 175, 55, 0.015);
+}
+
+
+/* VALORES */
+
+.about-values {
+  padding: 95px 0 85px;
+}
+
+.section-heading {
+  margin-bottom: 40px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 2.5rem;
+
+  font-weight: 400;
+
+  line-height: 1.15;
+}
+
+.values-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 15px;
+}
+
+.value-card {
+  min-height: 250px;
+
+  padding: 30px 25px;
+
+  background: #151817;
+
+  border: 1px solid rgba(212, 175, 55, 0.18);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(212, 175, 55, 0.55);
+}
+
+.value-icon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 25px;
+
+  background: rgba(212, 175, 55, 0.08);
+
+  border-radius: 50%;
+
+  color: #d4af37;
+
+  font-size: 1.2rem;
+}
+
+.value-card h3 {
+  margin: 0 0 12px;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 1.3rem;
+
+  font-weight: 400;
+}
+
+.value-card p {
+  margin: 0;
+
+  color: #777a76;
+
+  font-size: 0.7rem;
+
+  line-height: 1.8;
+}
+
+
+/* CTA */
+
+.about-cta {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 45px 50px;
+
+  background: #151817;
+
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.about-cta h2 {
+  margin: 0;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 2rem;
+
+  font-weight: 400;
+}
+
+.cta-button {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 14px 22px;
+
+  background: #d4af37;
+
+  color: #111413;
+
+  font-size: 0.63rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+
+  text-decoration: none;
+
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #e1c15a;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+  .about-hero {
+    grid-template-columns: 1fr;
+    padding: 50px;
+  }
+
+  .about-symbol {
+    display: none;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .about-page {
+    padding: 60px 20px 80px;
+  }
+
+  .about-hero {
+    padding: 40px 25px;
+  }
+
+  .about-content h1 {
+    font-size: 2.7rem;
+  }
+
+  .about-values {
+    padding: 70px 0;
+  }
+
+  .section-heading h2 {
+    font-size: 2rem;
+  }
+
+  .about-cta {
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 35px 25px;
+  }
+
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+}

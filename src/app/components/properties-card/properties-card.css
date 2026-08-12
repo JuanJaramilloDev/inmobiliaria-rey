@@ -1,0 +1,179 @@
+.property-card {
+  background: #ffffff;
+
+  border: 1px solid #e5e0d8;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+}
+
+
+/* IMAGEN */
+
+.property-image {
+  position: relative;
+
+  height: 280px;
+
+  overflow: hidden;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.property-card:hover .property-image img {
+  transform: scale(1.05);
+}
+
+
+/* ETIQUETAS */
+
+.property-operation,
+.property-featured {
+  position: absolute;
+
+  top: 18px;
+
+  padding: 7px 13px;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.property-operation {
+  left: 18px;
+
+  background: #222;
+
+  color: #ffffff;
+}
+
+.property-featured {
+  right: 18px;
+
+  background: #b08d50;
+
+  color: #ffffff;
+}
+
+
+/* CONTENIDO */
+
+.property-content {
+  padding: 28px;
+}
+
+.property-location {
+  margin-bottom: 10px;
+
+  color: #b08d50;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.property-content h3 {
+  margin: 0 0 12px;
+
+  color: #222;
+
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+}
+
+.property-price {
+  margin: 0 0 25px;
+
+  color: #222;
+
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+
+/* DETALLES */
+
+.property-details {
+  display: flex;
+
+  padding: 18px 0;
+
+  border-top: 1px solid #e8e3db;
+  border-bottom: 1px solid #e8e3db;
+}
+
+.property-details span {
+  flex: 1;
+
+  color: #777;
+
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.property-details span + span {
+  border-left: 1px solid #e5e0d8;
+}
+
+.property-details strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #222;
+
+  font-size: 0.85rem;
+}
+
+
+/* LINK */
+
+.property-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 22px;
+
+  color: #222;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.property-link span {
+  color: #b08d50;
+
+  font-size: 1.2rem;
+
+  transition: transform 0.3s ease;
+}
+
+.property-link:hover span {
+  transform: translateX(5px);
+}

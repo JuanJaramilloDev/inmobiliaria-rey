@@ -1,0 +1,199 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+
+  background: rgba(12, 14, 13, 0.96);
+
+  border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar-container {
+  width: min(1250px, 92%);
+
+  min-height: 72px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+/* LOGO */
+
+.brand {
+  flex-shrink: 0;
+
+  color: #d4af37;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 1.25rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  text-decoration: none;
+}
+
+/* LINKS */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+
+  margin-left: auto;
+}
+
+.nav-links a {
+  position: relative;
+
+  padding: 27px 0;
+
+  color: #b4b5b0;
+
+  font-size: 0.67rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.8px;
+
+  text-decoration: none;
+
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 17px;
+
+  height: 1px;
+
+  background: #d4af37;
+
+  transform: scaleX(0);
+
+  transform-origin: center;
+
+  transition: transform 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #d4af37;
+}
+
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+/* WHATSAPP */
+
+.whatsapp-button {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 11px 18px;
+
+  background: #d4af37;
+
+  color: #111413;
+
+  font-size: 0.65rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  text-decoration: none;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  background: #e1c15a;
+
+  transform: translateY(-2px);
+}
+
+.whatsapp-button i {
+  font-size: 0.9rem;
+}
+
+/* MENU */
+
+.menu-button {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+
+  border: 1px solid rgba(212, 175, 55, 0.3);
+
+  color: #d4af37;
+
+  font-size: 1.3rem;
+
+  cursor: pointer;
+}
+
+/* TABLET */
+
+@media (max-width: 950px) {
+
+  .nav-links {
+    gap: 17px;
+  }
+
+  .brand {
+    font-size: 1.05rem;
+  }
+
+}
+
+/* CELULAR */
+
+@media (max-width: 750px) {
+
+  .navbar-container {
+    min-height: 65px;
+  }
+
+  .nav-links,
+  .whatsapp-button {
+    display: none;
+  }
+
+  .menu-button {
+    display: flex;
+  }
+
+}

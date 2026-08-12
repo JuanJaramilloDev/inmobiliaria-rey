@@ -1,0 +1,421 @@
+.sell-page {
+  min-height: 100vh;
+
+  padding: 80px 30px 100px;
+
+  background: #0c0e0d;
+}
+
+.sell-container {
+  width: min(1200px, 100%);
+
+  margin: 0 auto;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.sell-hero {
+  min-height: 470px;
+
+  display: grid;
+
+  grid-template-columns: 1.3fr 0.7fr;
+
+  align-items: center;
+
+  padding: 65px;
+
+  background:
+    linear-gradient(
+      120deg,
+      #151817 0%,
+      #101211 60%,
+      #0c0e0d 100%
+    );
+
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.section-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #d4af37;
+
+  font-size: 0.6rem;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.sell-hero h1 {
+  margin: 0;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
+
+  font-weight: 400;
+
+  line-height: 1.05;
+}
+
+.sell-hero h1 em {
+  color: #d4af37;
+
+  font-style: normal;
+}
+
+.sell-hero p {
+  max-width: 570px;
+
+  margin: 25px 0 30px;
+
+  color: #858782;
+
+  font-size: 0.82rem;
+
+  line-height: 1.9;
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.whatsapp-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 13px 21px;
+
+  background: #d4af37;
+
+  color: #111413;
+
+  font-size: 0.65rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+
+  text-decoration: none;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  background: #e1c15a;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   DECORACIÓN
+========================= */
+
+.sell-hero-decoration {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.decoration-circle {
+  width: 230px;
+  height: 230px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(212, 175, 55, 0.4);
+
+  border-radius: 50%;
+
+  color: #d4af37;
+
+  font-size: 5rem;
+
+  box-shadow:
+    0 0 0 25px rgba(212, 175, 55, 0.025),
+    0 0 0 50px rgba(212, 175, 55, 0.015);
+}
+
+
+/* =========================
+   PROCESO
+========================= */
+
+.process-section {
+  padding: 95px 0 85px;
+}
+
+.section-heading {
+  margin-bottom: 40px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 2.5rem;
+
+  font-weight: 400;
+
+  line-height: 1.15;
+}
+
+.title-line {
+  width: 42px;
+  height: 2px;
+
+  margin-top: 17px;
+
+  background: #d4af37;
+}
+
+
+/* =========================
+   PROCESO GRID
+========================= */
+
+.process-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 14px;
+}
+
+.process-card {
+  position: relative;
+
+  min-height: 270px;
+
+  padding: 30px 25px;
+
+  background: #151817;
+
+  border: 1px solid rgba(212, 175, 55, 0.18);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.process-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(212, 175, 55, 0.55);
+}
+
+.process-number {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  color: rgba(212, 175, 55, 0.3);
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 1.4rem;
+}
+
+.process-icon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 25px;
+
+  background: rgba(212, 175, 55, 0.08);
+
+  border-radius: 50%;
+
+  color: #d4af37;
+
+  font-size: 1.2rem;
+}
+
+.process-card h3 {
+  margin: 0 0 12px;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 1.25rem;
+
+  font-weight: 400;
+}
+
+.process-card p {
+  margin: 0;
+
+  color: #777a76;
+
+  font-size: 0.7rem;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.sell-cta {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 40px;
+
+  padding: 45px 50px;
+
+  background: #151817;
+
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.sell-cta h2 {
+  margin: 0 0 8px;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 2rem;
+
+  font-weight: 400;
+}
+
+.sell-cta p {
+  margin: 0;
+
+  color: #777a76;
+
+  font-size: 0.72rem;
+}
+
+.cta-button {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 14px 22px;
+
+  background: #d4af37;
+
+  color: #111413;
+
+  font-size: 0.63rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+
+  text-decoration: none;
+
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #e1c15a;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .sell-hero {
+    grid-template-columns: 1fr;
+
+    padding: 50px;
+  }
+
+  .sell-hero-decoration {
+    display: none;
+  }
+
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .sell-page {
+    padding: 60px 20px 80px;
+  }
+
+  .sell-hero {
+    padding: 40px 25px;
+  }
+
+  .sell-hero h1 {
+    font-size: 2.7rem;
+  }
+
+  .process-section {
+    padding: 70px 0;
+  }
+
+  .section-heading h2 {
+    font-size: 2rem;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sell-cta {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding: 35px 25px;
+  }
+
+  .cta-button {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+}
