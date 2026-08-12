@@ -1,221 +1,84 @@
-<section class="featured-properties">
+<div class="properties-grid">
 
-  <div class="featured-container">
+  @for (propiedad of propiedades; track propiedad.id) {
 
-    <!-- ENCABEZADO -->
+    <article class="property-card">
 
-    <div class="featured-header">
+      <div class="property-image">
 
-      <div>
+        <img
+          [src]="propiedad.imagen"
+          [alt]="propiedad.titulo"
+        >
 
-        <span class="section-label">
-          PROPIEDADES
+        <span
+          class="property-status"
+          [class.sale]="propiedad.operacion === 'Venta'"
+          [class.rent]="propiedad.operacion === 'Alquiler'"
+          [class.anticres]="propiedad.operacion === 'Anticres'"
+        >
+          {{ propiedad.operacion }}
         </span>
-
-        <h2>
-          Propiedades Destacadas
-        </h2>
-
-        <div class="title-line"></div>
 
       </div>
 
-      <a routerLink="/comprar" class="view-all">
-        Ver todas
-        <i class="bi bi-arrow-right"></i>
-      </a>
 
-    </div>
+      <div class="property-content">
 
+        <span class="property-type">
+          {{ propiedad.tipo }}
+        </span>
 
-    <!-- UBICACIÓN -->
-
-    <div class="featured-location">
-
-      <i class="bi bi-geo-alt"></i>
-
-      <span>Pasto, Nariño</span>
-
-    </div>
+        <h3>
+          {{ propiedad.titulo }}
+        </h3>
 
 
-    <!-- PROPIEDADES -->
+        <div class="property-price">
 
-    <div class="properties-grid">
+          ${{ propiedad.precio | number:'1.0-0':'es-CO' }}
 
-
-      <!-- PROPIEDAD 1 -->
-
-      <article class="property-card">
-
-        <div class="property-image">
-
-          <img
-            src="/img/propiedades/casa-1.jpg"
-            alt="Villa Exclusiva Norte"
-          >
-
-          <span class="property-status sale">
-            Venta
+          <span>
+            COP
           </span>
 
         </div>
 
 
-        <div class="property-content">
+        <div class="property-details">
 
-          <span class="property-type">
-            Casa
+          <span>
+
+            <i class="bi bi-door-open"></i>
+
+            {{ propiedad.habitaciones }} Hab.
+
           </span>
 
-          <h3>
-            Villa Exclusiva Norte
-          </h3>
 
-          <div class="property-price">
-            $1.200.000.000 <span>COP</span>
-          </div>
+          <span>
 
+            <i class="bi bi-droplet"></i>
 
-          <div class="property-details">
+            {{ propiedad.banos }} Baños
 
-            <span>
-              <i class="bi bi-door-open"></i>
-              4 Hab.
-            </span>
-
-            <span>
-              <i class="bi bi-droplet"></i>
-              5 Baños
-            </span>
-
-            <span>
-              <i class="bi bi-bounding-box"></i>
-              350 m²
-            </span>
-
-          </div>
-
-        </div>
-
-      </article>
+          </span>
 
 
-      <!-- PROPIEDAD 2 -->
+          <span>
 
-      <article class="property-card">
+            <i class="bi bi-bounding-box"></i>
 
-        <div class="property-image">
+            {{ propiedad.area }} m²
 
-          <img
-            src="/img/propiedades/apartamento-1.jpg"
-            alt="Penthouse Centro"
-          >
-
-          <span class="property-status rent">
-            Alquiler
           </span>
 
         </div>
 
+      </div>
 
-        <div class="property-content">
+    </article>
 
-          <span class="property-type">
-            Apartamento
-          </span>
+  }
 
-          <h3>
-            Penthouse Centro
-          </h3>
-
-          <div class="property-price">
-            $5.500.000 <span>COP/mes</span>
-          </div>
-
-
-          <div class="property-details">
-
-            <span>
-              <i class="bi bi-door-open"></i>
-              3 Hab.
-            </span>
-
-            <span>
-              <i class="bi bi-droplet"></i>
-              3 Baños
-            </span>
-
-            <span>
-              <i class="bi bi-bounding-box"></i>
-              180 m²
-            </span>
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- PROPIEDAD 3 -->
-
-      <article class="property-card">
-
-        <div class="property-image">
-
-          <img
-            src="/img/propiedades/casa-2.jpg"
-            alt="Casa Campestre Sur"
-          >
-
-          <span class="property-status sale">
-            Venta
-          </span>
-
-        </div>
-
-
-        <div class="property-content">
-
-          <span class="property-type">
-            Casa Campestre
-          </span>
-
-          <h3>
-            Casa Campestre Sur
-          </h3>
-
-          <div class="property-price">
-            $2.100.000.000 <span>COP</span>
-          </div>
-
-
-          <div class="property-details">
-
-            <span>
-              <i class="bi bi-door-open"></i>
-              5 Hab.
-            </span>
-
-            <span>
-              <i class="bi bi-droplet"></i>
-              6 Baños
-            </span>
-
-            <span>
-              <i class="bi bi-bounding-box"></i>
-              500 m²
-            </span>
-
-          </div>
-
-        </div>
-
-      </article>
-
-    </div>
-
-  </div>
-
-</section>
+</div>

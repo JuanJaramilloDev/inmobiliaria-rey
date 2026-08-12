@@ -1,0 +1,234 @@
+@if (propiedad) {
+
+<section class="property-detail">
+
+    <div class="detail-container">
+
+        <!-- VOLVER -->
+
+        <button type="button" class="back-button" (click)="volver()">
+            <i class="bi bi-arrow-left"></i>
+            Volver a propiedades
+        </button>
+
+
+        <!-- GALERÍA -->
+
+        <div class="property-gallery">
+
+            <div class="main-image">
+
+                <img [src]="propiedad.imagen[imagenSeleccionada]" [alt]="propiedad.titulo">
+
+                <span class="property-status">
+                    {{ propiedad.operacion }}
+                </span>
+
+                @if (propiedad.imagen.length > 1) {
+
+                <button type="button" class="gallery-arrow gallery-prev" (click)="imagenAnterior()">
+
+                    <i class="bi bi-chevron-left"></i>
+
+                </button>
+
+                <button type="button" class="gallery-arrow gallery-next" (click)="imagenSiguiente()">
+
+                    <i class="bi bi-chevron-right"></i>
+
+                </button>
+
+                }
+
+            </div>
+
+            @if (propiedad.imagen.length > 1) {
+
+            <div class="gallery-thumbnails">
+
+                @for (
+                imagen of propiedad.imagen;
+                track $index
+                ) {
+
+                <button type="button" class="thumbnail" [class.active]="imagenSeleccionada === $index"
+                    (click)="seleccionarImagen($index)">
+
+                    <img [src]="imagen" [alt]="propiedad.titulo + ' imagen ' + ($index + 1)">
+
+                </button>
+
+                }
+
+            </div>
+
+            }
+
+        </div>
+
+
+        <!-- INFORMACIÓN -->
+
+        <div class="property-layout">
+
+            <div class="property-main">
+
+                <span class="property-type">
+                    {{ propiedad.tipo }}
+                </span>
+
+                <h1>
+                    {{ propiedad.titulo }}
+                </h1>
+
+                <p class="location">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    {{ propiedad.ubicacion }}
+
+                </p>
+
+
+                <div class="price">
+
+                    ${{ propiedad.precio }}
+
+                    <span>
+                        COP
+                    </span>
+
+                </div>
+
+
+                <!-- CARACTERÍSTICAS -->
+
+                <div class="features">
+
+                    <div class="feature">
+
+                        <i class="bi bi-door-open"></i>
+
+                        <span>Habitaciones</span>
+
+                        <strong>
+                            {{ propiedad.habitaciones }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <i class="bi bi-droplet"></i>
+
+                        <span>Baños</span>
+
+                        <strong>
+                            {{ propiedad.banos }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <i class="bi bi-bounding-box"></i>
+
+                        <span>Área</span>
+
+                        <strong>
+                            {{ propiedad.area }} m²
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPCIÓN -->
+
+                <div class="description">
+
+                    <span class="section-label">
+                        DESCRIPCIÓN
+                    </span>
+
+                    <h2>
+                        Sobre esta propiedad
+                    </h2>
+
+                    <p>
+                        {{ propiedad.descripcion }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACTO -->
+
+            <aside class="contact-box">
+
+                <span class="section-label">
+                    ¿LE INTERESA?
+                </span>
+
+                <h2>
+                    Conozca más sobre esta propiedad.
+                </h2>
+
+                <p>
+                    Comuníquese con nuestro equipo para obtener
+                    más información, agendar una visita o resolver
+                    cualquier inquietud.
+                </p>
+
+
+                <button type="button" class="whatsapp-button" (click)="contactarWhatsApp()">
+                    <i class="bi bi-whatsapp"></i>
+                    Contactar por WhatsApp
+                </button>
+
+
+                <a href="tel:+573000000000" class="call-button">
+
+                    <i class="bi bi-telephone"></i>
+
+                    Llamar a la inmobiliaria
+
+                </a>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+}
+
+
+@if (!propiedad) {
+
+<section class="not-found">
+
+    <i class="bi bi-house-x"></i>
+
+    <h1>
+        Propiedad no encontrada
+    </h1>
+
+    <p>
+        La propiedad que buscas no existe o ya no está disponible.
+    </p>
+
+    <a routerLink="/" class="back-home">
+        Volver al inicio
+    </a>
+
+</section>
+
+}

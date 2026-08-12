@@ -1,66 +1,29 @@
-import { Component } from '@angular/core';
-import { Propiedad } from '../../models/propiedad.model';
+import { Component, OnInit } from '@angular/core';
+import { Propiedad as PropiedadModel } from '../../models/propiedad.model';
+import { Propiedad as PropiedadService } from '../../services/propiedad';
 import { RouterLink } from '@angular/router';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-feactured-properties',
   standalone: true,
-  imports: [RouterLink],
+  imports: [DecimalPipe],
   templateUrl: './feactured-properties.html',
   styleUrl: './feactured-properties.css'
 })
-export class FeacturedProperties {
+export class FeacturedProperties implements OnInit {
 
-  propiedades: Propiedad[] = [
+  propiedades: PropiedadModel[] = [];
 
-    {
-      id: 1,
-      titulo: 'Casa Moderna',
-      tipo: 'Casa',
-      operacion: 'Venta',
-      precio: 480000000,
-      ubicacion: 'Pasto, Nariño',
-      descripcion: 'Casa moderna con amplios espacios.',
-      habitaciones: 4,
-      banos: 3,
-      area: 220,
-      imagen: '/img/propiedades/casa-1.jpg',
-      destacada: true,
-      estado: 'Disponible'
-    },
+  constructor(
+    private propiedadService: PropiedadService
+  ) {}
 
-    {
-      id: 2,
-      titulo: 'Apartamento Exclusivo',
-      tipo: 'Apartamento',
-      operacion: 'Venta',
-      precio: 320000000,
-      ubicacion: 'Pasto, Nariño',
-      descripcion: 'Apartamento moderno en excelente ubicación.',
-      habitaciones: 3,
-      banos: 2,
-      area: 110,
-      imagen: '/img/propiedades/apartamento-1.jpg',
-      destacada: true,
-      estado: 'Disponible'
-    },
+  ngOnInit(): void {
 
-    {
-      id: 3,
-      titulo: 'Apartamento Familiar',
-      tipo: 'Apartamento',
-      operacion: 'Alquiler',
-      precio: 1800000,
-      ubicacion: 'Pasto, Nariño',
-      descripcion: 'Espacio cómodo para toda la familia.',
-      habitaciones: 3,
-      banos: 2,
-      area: 95,
-      imagen: '/img/propiedades/apartamento-2.jpg',
-      destacada: true,
-      estado: 'Disponible'
-    }
+    this.propiedades =
+      this.propiedadService.getPropiedadesDestacadas();
 
-  ];
+  }
 
 }

@@ -48,6 +48,12 @@ export const routes: Routes = [
       import('./pages/contacto/contacto').then(m => m.Contacto)
   },
 
+  {
+    path: 'propiedad/:id',
+    loadComponent: () =>
+      import('./pages/property-detail/property-detail').then(m => m.PropertyDetail)
+  },
+
 
   // =========================
   // PANEL ADMINISTRATIVO

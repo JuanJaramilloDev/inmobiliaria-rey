@@ -17,7 +17,7 @@
   margin-bottom: 45px;
 }
 
-.page-header > span {
+.page-header>span {
   color: #d4af37;
 
   font-size: 0.62rem;
@@ -148,39 +148,39 @@
   background: #e1c15a;
 }
 
+.clear-button {
+  position: absolute;
+  right: 160px;
+  bottom: -38px;
 
-/* RESULTADOS */
-
-.results-header {
-  display: flex;
-
+  display: inline-flex;
   align-items: center;
+  gap: 6px;
 
-  justify-content: space-between;
+  padding: 5px 0;
 
-  margin-bottom: 20px;
+  background: transparent;
+  border: none;
+
+  color: #777873;
+
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: color 0.3s ease;
 }
 
-.results-header > span {
-  color: #a5a6a1;
-
-  font-size: 0.72rem;
+.clear-button i {
+  color: #d4af37;
 }
 
-.results-header select {
-  padding: 8px 12px;
-
-  background: #151817;
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  color: #a5a6a1;
-
-  outline: none;
-
-  font-size: 0.65rem;
+.clear-button:hover {
+  color: #d4af37;
 }
-
 
 /* GRID */
 

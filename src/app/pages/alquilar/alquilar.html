@@ -9,7 +9,7 @@
       <h1>Propiedades en Alquiler</h1>
 
       <p>
-        Encuentra el espacio ideal para vivir o desarrollar tu proyecto.
+        Encuentra el espacio ideal para ti.
       </p>
 
     </div>
@@ -25,10 +25,7 @@
 
           <i class="bi bi-geo-alt"></i>
 
-          <input
-            type="text"
-            placeholder="Ciudad o sector"
-          >
+          <input type="text" placeholder="Ciudad o sector" [(ngModel)]="ubicacionFiltro">
 
         </div>
 
@@ -43,15 +40,13 @@
 
           <i class="bi bi-building"></i>
 
-          <select>
-
+          <select [(ngModel)]="tipoFiltro">
             <option value="">Todos</option>
-            <option>Casa</option>
-            <option>Apartamento</option>
-            <option>Local</option>
-            <option>Oficina</option>
-            <option>Habitación</option>
-
+            <option value="Casa">Casa</option>
+            <option value="Apartamento">Apartamento</option>
+            <option value="Lote">Lote</option>
+            <option value="Local">Local</option>
+            <option value="Oficina">Oficina</option>
           </select>
 
         </div>
@@ -61,20 +56,33 @@
 
       <div class="filter">
 
-        <label>Canon máximo</label>
+        <label>Precio máximo</label>
 
         <div class="filter-input">
 
           <i class="bi bi-cash"></i>
 
-          <select>
+          <select [(ngModel)]="precioMaximo">
 
-            <option value="">Sin límite</option>
-            <option>$1.000.000</option>
-            <option>$1.500.000</option>
-            <option>$2.000.000</option>
-            <option>$3.000.000</option>
-            <option>$5.000.000</option>
+            <option [ngValue]="null">
+              Sin límite
+            </option>
+
+            <option [ngValue]="500000">
+              $500.000
+            </option>
+
+            <option [ngValue]="1000000">
+              $1.000.000
+            </option>
+
+            <option [ngValue]="2000000">
+              $2.000.000
+            </option>
+
+            <option [ngValue]="5000000">
+              $5.000.000
+            </option>
 
           </select>
 
@@ -83,96 +91,92 @@
       </div>
 
 
-      <button class="filter-button">
-
+      <button type="button" class="filter-button" (click)="buscar()">
         <i class="bi bi-search"></i>
-
         Buscar
+      </button>
 
+      <button type="button" class="clear-button" (click)="limpiarFiltros()">
+        <i class="bi bi-x-circle"></i>
+        Limpiar filtros
       </button>
 
     </div>
 
-
-    <div class="results-header">
-
-      <span>
-        Propiedades disponibles
-      </span>
-
-      <select>
-
-        <option>Más recientes</option>
-        <option>Menor canon</option>
-        <option>Mayor canon</option>
-
-      </select>
-
-    </div>
-
-
     <div class="properties-grid">
 
-
-      <!-- PROPIEDAD 1 -->
+      @for (propiedad of propiedades; track propiedad.id) {
 
       <article class="property-card">
 
         <div class="property-image">
 
-          <img
-            src="/img/propiedades/apartamento-1.jpg"
-            alt="Apartamento en alquiler"
-          >
+          <img [src]="propiedad.imagen [0]" [alt]="propiedad.titulo">
 
-          <span>Alquiler</span>
+          <span>
+            {{ propiedad.operacion }}
+          </span>
 
         </div>
 
 
         <div class="property-content">
 
-          <small>Apartamento</small>
+          <small>
+            {{ propiedad.tipo }}
+          </small>
 
-          <h2>Apartamento Norte</h2>
-
+          <h2>
+            {{ propiedad.titulo }}
+          </h2>
 
           <p class="location">
 
             <i class="bi bi-geo-alt"></i>
 
-            Pasto, Nariño
+            {{ propiedad.ubicacion }}
 
           </p>
 
-
           <strong>
-            $1.800.000
-            <span>/ mes</span>
+
+            ${{ propiedad.precio }}
+
+            <span>COP/mes</span>
+
           </strong>
 
 
           <div class="details">
 
             <span>
+
               <i class="bi bi-door-open"></i>
-              3 Hab.
+
+              {{ propiedad.habitaciones }} Hab.
+
             </span>
 
             <span>
+
               <i class="bi bi-droplet"></i>
-              2 Baños
+
+              {{ propiedad.banos }} Baños
+
             </span>
 
             <span>
+
               <i class="bi bi-bounding-box"></i>
-              95 m²
+
+              {{ propiedad.area }} m²
+
             </span>
 
           </div>
 
 
-          <a href="#" class="details-button">
+          <a [routerLink]="['/propiedad', propiedad.id]" class="details-button">
 
             Ver propiedad
 
@@ -184,76 +188,26 @@
 
       </article>
 
-
-      <!-- PROPIEDAD 2 -->
-
-      <article class="property-card">
-
-        <div class="property-image">
-
-          <img
-            src="/img/propiedades/casa-2.jpg"
-            alt="Casa en alquiler"
-          >
-
-          <span>Alquiler</span>
-
-        </div>
+      }
 
 
-        <div class="property-content">
+      @if (propiedades.length === 0) {
 
-          <small>Casa</small>
+      <div class="no-properties">
 
-          <h2>Casa Familiar Sur</h2>
+        <i class="bi bi-house-x"></i>
 
+        <h2>
+          No hay propiedades disponibles
+        </h2>
 
-          <p class="location">
+        <p>
+          Actualmente no tenemos propiedades disponibles para alquiler.
+        </p>
 
-            <i class="bi bi-geo-alt"></i>
+      </div>
 
-            Pasto, Nariño
-
-          </p>
-
-
-          <strong>
-            $2.500.000
-            <span>/ mes</span>
-          </strong>
-
-
-          <div class="details">
-
-            <span>
-              <i class="bi bi-door-open"></i>
-              4 Hab.
-            </span>
-
-            <span>
-              <i class="bi bi-droplet"></i>
-              3 Baños
-            </span>
-
-            <span>
-              <i class="bi bi-bounding-box"></i>
-              180 m²
-            </span>
-
-          </div>
-
-
-          <a href="#" class="details-button">
-
-            Ver propiedad
-
-            <i class="bi bi-arrow-right"></i>
-
-          </a>
-
-        </div>
-
-      </article>
+      }
 
     </div>
 

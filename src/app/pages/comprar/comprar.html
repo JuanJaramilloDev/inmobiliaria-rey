@@ -2,6 +2,9 @@
 
   <div class="properties-container">
 
+
+    <!-- ENCABEZADO -->
+
     <div class="page-header">
 
       <span>REY INMOBILIARIA</span>
@@ -15,6 +18,8 @@
     </div>
 
 
+    <!-- FILTROS -->
+
     <div class="filters">
 
       <div class="filter">
@@ -22,12 +27,11 @@
         <label>Ubicación</label>
 
         <div class="filter-input">
+
           <i class="bi bi-geo-alt"></i>
 
-          <input
-            type="text"
-            placeholder="Ciudad o sector"
-          >
+          <input type="text" placeholder="Ciudad o sector" [(ngModel)]="ubicacionFiltro">
+
         </div>
 
       </div>
@@ -41,13 +45,15 @@
 
           <i class="bi bi-building"></i>
 
-          <select>
+          <select [(ngModel)]="tipoFiltro">
+
             <option value="">Todos</option>
-            <option>Casa</option>
-            <option>Apartamento</option>
-            <option>Lote</option>
-            <option>Local</option>
-            <option>Oficina</option>
+            <option value="Casa">Casa</option>
+            <option value="Apartamento">Apartamento</option>
+            <option value="Lote">Lote</option>
+            <option value="Local">Local</option>
+            <option value="Oficina">Oficina</option>
+
           </select>
 
         </div>
@@ -63,154 +69,146 @@
 
           <i class="bi bi-cash"></i>
 
-          <select>
-            <option value="">Sin límite</option>
-            <option>$200.000.000</option>
-            <option>$400.000.000</option>
-            <option>$600.000.000</option>
-            <option>$1.000.000.000</option>
+          <select [(ngModel)]="precioMaximo">
+
+            <option [ngValue]="null">
+              Sin límite
+            </option>
+
+            <option [ngValue]="200000000">
+              $200.000.000
+            </option>
+
+            <option [ngValue]="400000000">
+              $400.000.000
+            </option>
+
+            <option [ngValue]="600000000">
+              $600.000.000
+            </option>
+
+            <option [ngValue]="1000000000">
+              $1.000.000.000
+            </option>
+
           </select>
 
         </div>
 
       </div>
 
-
-      <button class="filter-button">
+      <button type="button" class="filter-button" (click)="buscar()">
         <i class="bi bi-search"></i>
         Buscar
       </button>
 
-    </div>
-
-
-    <div class="results-header">
-
-      <span>
-        Propiedades disponibles
-      </span>
-
-      <select>
-        <option>Más recientes</option>
-        <option>Menor precio</option>
-        <option>Mayor precio</option>
-      </select>
+      <button type="button" class="clear-button" (click)="limpiarFiltros()">
+        <i class="bi bi-x-circle"></i>
+        Limpiar
+      </button>
 
     </div>
 
+    <!-- PROPIEDADES -->
 
     <div class="properties-grid">
 
+      @for (propiedad of propiedades; track propiedad.id) {
+
       <article class="property-card">
+
 
         <div class="property-image">
 
-          <img
-            src="/img/propiedades/casa-1.jpg"
-            alt="Casa en venta"
-          >
+          <img [src]="propiedad.imagen [0]" [alt]="propiedad.titulo">
 
-          <span>Venta</span>
+          <span>
+            {{ propiedad.operacion }}
+          </span>
 
         </div>
 
+
         <div class="property-content">
 
-          <small>Casa</small>
+          <small>
+            {{ propiedad.tipo }}
+          </small>
 
-          <h2>Villa Exclusiva Norte</h2>
+
+          <h2>
+            {{ propiedad.titulo }}
+          </h2>
+
 
           <p class="location">
+
             <i class="bi bi-geo-alt"></i>
-            Pasto, Nariño
+
+            {{ propiedad.ubicacion }}
+
           </p>
 
-          <strong>$1.200.000.000 COP</strong>
+
+          <strong>
+            ${{ propiedad.precio }}
+            <span>COP</span>
+          </strong>
 
           <div class="details">
 
             <span>
               <i class="bi bi-door-open"></i>
-              4 Hab.
+              {{ propiedad.habitaciones }} Hab.
             </span>
 
             <span>
               <i class="bi bi-droplet"></i>
-              5 Baños
+              {{ propiedad.banos }} Baños
             </span>
 
             <span>
               <i class="bi bi-bounding-box"></i>
-              350 m²
+              {{ propiedad.area }} m²
             </span>
 
           </div>
 
-          <a href="#" class="details-button">
+
+          <a [routerLink]="['/propiedad', propiedad.id]" class="details-button">
+
             Ver propiedad
+
             <i class="bi bi-arrow-right"></i>
+
           </a>
 
         </div>
 
       </article>
 
-
-      <article class="property-card">
-
-        <div class="property-image">
-
-          <img
-            src="/img/propiedades/casa-2.jpg"
-            alt="Casa en venta"
-          >
-
-          <span>Venta</span>
-
-        </div>
-
-        <div class="property-content">
-
-          <small>Casa Campestre</small>
-
-          <h2>Casa Campestre Sur</h2>
-
-          <p class="location">
-            <i class="bi bi-geo-alt"></i>
-            Pasto, Nariño
-          </p>
-
-          <strong>$2.100.000.000 COP</strong>
-
-          <div class="details">
-
-            <span>
-              <i class="bi bi-door-open"></i>
-              5 Hab.
-            </span>
-
-            <span>
-              <i class="bi bi-droplet"></i>
-              6 Baños
-            </span>
-
-            <span>
-              <i class="bi bi-bounding-box"></i>
-              500 m²
-            </span>
-
-          </div>
-
-          <a href="#" class="details-button">
-            Ver propiedad
-            <i class="bi bi-arrow-right"></i>
-          </a>
-
-        </div>
-
-      </article>
+      }
 
     </div>
+
+
+    @if (propiedades.length === 0) {
+
+    <div class="no-properties">
+
+      <i class="bi bi-house-x"></i>
+
+      <h2>
+        No hay propiedades disponibles
+      </h2>
+
+      <p>
+        Actualmente no tenemos propiedades disponibles para venta.
+      </p>
+
+    </div>
+
+    }
 
   </div>
 
