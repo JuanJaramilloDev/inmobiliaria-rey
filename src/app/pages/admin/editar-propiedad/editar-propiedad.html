@@ -1,1 +1,450 @@
-<p>editar-propiedad works!</p>
+<section class="admin-page">
+
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      REY
+      <span>INMOBILIARIA</span>
+    </div>
+
+    <div class="admin-info">
+
+      <div class="admin-avatar">
+        <i class="bi bi-person"></i>
+      </div>
+
+      <div>
+        <strong>Administrador</strong>
+        <small>Panel administrativo</small>
+      </div>
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a routerLink="/admin/dashboard">
+        <i class="bi bi-grid"></i>
+        Dashboard
+      </a>
+
+      <a routerLink="/admin/propiedades" class="active">
+        <i class="bi bi-buildings"></i>
+        Propiedades
+      </a>
+
+      <a routerLink="/admin/crear-propiedad">
+        <i class="bi bi-plus-circle"></i>
+        Agregar propiedad
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <a routerLink="/">
+        <i class="bi bi-box-arrow-up-right"></i>
+        Ver sitio web
+      </a>
+
+      <a routerLink="/admin/login">
+        <i class="bi bi-box-arrow-left"></i>
+        Cerrar sesión
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <main class="admin-content">
+
+    <header class="page-header">
+
+      <div>
+
+        <span>ADMINISTRACIÓN</span>
+
+        <h1>Editar propiedad</h1>
+
+        <p>
+          Modifique la información de la propiedad.
+        </p>
+
+      </div>
+
+      <a routerLink="/admin/propiedades" class="back-button">
+        <i class="bi bi-arrow-left"></i>
+        Volver
+      </a>
+
+    </header>
+
+
+    @if (cargando) {
+
+    <div class="loading-state">
+
+      <i class="bi bi-arrow-repeat"></i>
+
+      <p>Cargando información de la propiedad...</p>
+
+    </div>
+
+    }
+
+
+    @if (!cargando) {
+
+    <form class="property-form" (ngSubmit)="guardarCambios()">
+
+      <!-- INFORMACIÓN -->
+
+      <section class="form-section">
+
+        <div class="form-title">
+
+          <i class="bi bi-house"></i>
+
+          <div>
+            <span>INFORMACIÓN</span>
+            <h2>Datos de la propiedad</h2>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group full">
+
+            <label>
+              Título de la propiedad *
+            </label>
+
+            <input type="text" name="titulo" [(ngModel)]="propiedad.titulo" placeholder="Ej. Casa Moderna Norte"
+              required>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Tipo de propiedad *
+            </label>
+
+            <select name="tipo" [(ngModel)]="propiedad.tipo" required>
+
+              <option value="Casa">Casa</option>
+              <option value="Apartamento">Apartamento</option>
+              <option value="Lote">Lote</option>
+              <option value="Local">Local</option>
+              <option value="Oficina">Oficina</option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Operación *
+            </label>
+
+            <select name="operacion" [(ngModel)]="propiedad.operacion" required>
+
+              <option value="Venta">Venta</option>
+              <option value="Alquiler">Alquiler</option>
+              <option value="Anticres">Anticres</option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Precio *
+            </label>
+
+            <input type="number" name="precio" [(ngModel)]="propiedad.precio" min="0" required>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Ubicación *
+            </label>
+
+            <input type="text" name="ubicacion" [(ngModel)]="propiedad.ubicacion" placeholder="Ej. Pasto, Nariño"
+              required>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- CARACTERÍSTICAS -->
+
+      <section class="form-section">
+
+        <div class="form-title">
+
+          <i class="bi bi-list-check"></i>
+
+          <div>
+            <span>CARACTERÍSTICAS</span>
+            <h2>Detalles</h2>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Habitaciones
+            </label>
+
+            <input type="number" name="habitaciones" [(ngModel)]="propiedad.habitaciones" min="0">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Baños
+            </label>
+
+            <input type="number" name="banos" [(ngModel)]="propiedad.banos" min="0">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Área (m²)
+            </label>
+
+            <input type="number" name="area" [(ngModel)]="propiedad.area" min="0">
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Descripción *
+            </label>
+
+            <textarea name="descripcion" [(ngModel)]="propiedad.descripcion" rows="5"
+              placeholder="Describe las características de la propiedad..." required></textarea>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- IMÁGENES -->
+
+      <section class="form-section">
+
+        <div class="form-title">
+
+          <i class="bi bi-images"></i>
+
+          <div>
+
+            <span>IMÁGENES</span>
+
+            <h2>Fotos de la propiedad</h2>
+
+          </div>
+
+        </div>
+
+
+        <!-- IMÁGENES ACTUALES -->
+
+        @if (propiedad.imagen.length > 0) {
+
+        <div class="current-images">
+
+          @for (
+          imagen of propiedad.imagen;
+          track imagen
+          ) {
+
+          <div class="current-image">
+
+            <img [src]="imagen" alt="Imagen de la propiedad">
+            <button type="button" class="delete-image-button" (click)="eliminarImagen(imagen)" title="Eliminar imagen">
+
+              <i class="bi bi-trash"></i>
+
+            </button>
+
+          </div>
+
+          }
+
+        </div>
+
+        }
+
+
+        <!-- NUEVAS IMÁGENES -->
+
+        <div class="form-group">
+
+          <label>
+            Agregar nuevas imágenes
+          </label>
+
+          <input type="file" accept="image/*" multiple (change)="seleccionarImagenes($event)">
+
+          <small>
+            Puede seleccionar varias imágenes.
+          </small>
+
+        </div>
+
+
+        <!-- ARCHIVOS SELECCIONADOS -->
+
+        @if (imagenesSeleccionadas.length > 0) {
+
+        <div class="selected-images">
+
+          <strong>
+            Nuevas imágenes:
+          </strong>
+
+          @for (
+          imagen of imagenesSeleccionadas;
+          track imagen.name
+          ) {
+
+          <span>
+            {{ imagen.name }}
+          </span>
+
+          }
+
+        </div>
+
+        }
+
+      </section>
+
+      <!-- ESTADO -->
+
+      <section class="form-section">
+
+        <div class="form-title">
+
+          <i class="bi bi-check2-circle"></i>
+
+          <div>
+            <span>PUBLICACIÓN</span>
+            <h2>Estado de la propiedad</h2>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Estado *
+            </label>
+
+            <select name="estado" [(ngModel)]="propiedad.estado" required>
+
+              <option value="Disponible">
+                Disponible
+              </option>
+
+              <option value="Vendida">
+                Vendida
+              </option>
+
+              <option value="Alquilada">
+                Alquilada
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- DESTACADA -->
+
+      <section class="form-section">
+
+        <label class="checkbox-container">
+
+          <input type="checkbox" name="destacada" [(ngModel)]="propiedad.destacada">
+
+          <span class="checkmark"></span>
+
+          <div>
+
+            <strong>
+              Mostrar como propiedad destacada
+            </strong>
+
+            <small>
+              Aparecerá en la sección de propiedades destacadas del inicio.
+            </small>
+
+          </div>
+
+        </label>
+
+      </section>
+
+
+      <!-- BOTONES -->
+
+      <div class="form-actions">
+
+        <a routerLink="/admin/propiedades" class="cancel-button">
+          Cancelar
+        </a>
+
+
+        <button type="submit" class="save-button" [disabled]="guardando">
+
+          <i class="bi bi-check-lg"></i>
+
+          {{ guardando ? 'Guardando...' : 'Guardar cambios' }}
+
+        </button>
+
+      </div>
+
+    </form>
+
+    }
+
+  </main>
+
+</section>

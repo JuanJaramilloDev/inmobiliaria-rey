@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-search',
@@ -9,17 +10,26 @@ import { FormsModule } from '@angular/forms';
 })
 export class PropertySearch {
 
-  operacion = 'Comprar';
+  operacion = 'Venta';
   tipoPropiedad = '';
   ubicacion = '';
   precio = '';
 
+  constructor(private router: Router) {}
+
   buscar(): void {
-    console.log({
-      operacion: this.operacion,
-      tipoPropiedad: this.tipoPropiedad,
-      ubicacion: this.ubicacion,
-      precio: this.precio
+    const rutaPorOperacion: Record<string, string> = {
+      Venta: '/comprar',
+      Alquiler: '/alquilar',
+      Anticres: '/anticres'
+    };
+
+    this.router.navigate([rutaPorOperacion[this.operacion] ?? '/comprar'], {
+      queryParams: {
+        ubicacion: this.ubicacion.trim() || null,
+        tipo: this.tipoPropiedad || null,
+        precio: this.precio || null
+      }
     });
   }
 

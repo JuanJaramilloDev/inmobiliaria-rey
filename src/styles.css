@@ -41,3 +41,49 @@ input,
 select {
   font-family: inherit;
 }
+
+img { max-width: 100%; }
+
+@media (max-width: 550px) {
+  body { overflow-x: hidden; }
+
+  .property-image .operation-badge,
+  .property-image .property-state {
+    padding: 5px 8px;
+    font-size: .5rem;
+  }
+
+  .property-image .property-state { top: 41px; }
+}
+/* Estado de disponibilidad en tarjetas de propiedades. */
+.property-image .operation-badge,
+.property-image .property-state {
+  position: absolute;
+  z-index: 2;
+  padding: 6px 10px;
+  color: #111413;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.property-image .operation-badge {
+  top: 14px;
+  left: 14px;
+  background: #d4af37;
+}
+
+.property-image .property-state {
+  top: 45px;
+  left: 14px;
+  background: #77b98a;
+}
+
+.property-image .property-state.sold {
+  background: #d97474;
+}
+
+.property-image .property-state.rented {
+  background: #8bb7d9;
+}

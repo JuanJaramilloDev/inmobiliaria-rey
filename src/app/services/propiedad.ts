@@ -1,159 +1,77 @@
 import { Injectable } from '@angular/core';
 import { Propiedad as PropiedadModel } from '../models/propiedad.model';
+import { SupabaseService } from './supabase';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class Propiedad {
+  constructor(private supabaseService: SupabaseService) { }
 
-  private propiedades: PropiedadModel[] = [
-
-    {
-      id: 1,
-      titulo: 'Casa Moderna',
-      tipo: 'Casa',
-      operacion: 'Venta',
-      precio: 480000000,
-      ubicacion: 'Tambo, Nariños',
-      descripcion: 'Casa moderna con amplios espacios.',
-      habitaciones: 4,
-      banos: 3,
-      area: 220,
-      imagen: [
-        '/img/fondo.png',
-        '/img/fondo.png',
-        '/img/fondo.png'
-      ],
-      destacada: true,
-      estado: 'Disponible'
-    },
-
-    {
-      id: 2,
-      titulo: 'Apartamento Exclusivo',
-      tipo: 'Apartamento',
-      operacion: 'Venta',
-      precio: 320000000,
-      ubicacion: 'Pasto, Nariño',
-      descripcion: 'Apartamento moderno en excelente ubicación.',
-      habitaciones: 3,
-      banos: 2,
-      area: 110,
-      imagen: [
-        '/img/fondo.png',
-        '/img/fondo.png',
-        '/img/fondo.png'
-      ],
-      destacada: true,
-      estado: 'Disponible'
-    },
-
-    {
-      id: 3,
-      titulo: 'Apartamento Familiar',
-      tipo: 'Apartamento',
-      operacion: 'Alquiler',
-      precio: 1800000,
-      ubicacion: 'Pasto, Nariño',
-      descripcion: 'Espacio cómodo para toda la familia.',
-      habitaciones: 3,
-      banos: 2,
-      area: 95,
-      imagen: [
-        '/img/fondo.png',
-        '/img/fondo.png',
-        '/img/fondo.png'
-      ],
-      destacada: true,
-      estado: 'Disponible'
-    },
-
-    {
-      id: 4,
-      titulo: 'Casa Sector Norte',
-      tipo: 'Casa',
-      operacion: 'Anticres',
-      precio: 700000000,
-      ubicacion: 'Pasto, Nariño',
-      descripcion: 'Casa amplia disponible en modalidad de anticres.',
-      habitaciones: 4,
-      banos: 3,
-      area: 180,
-      imagen: [
-        '/img/fondo.png',
-        '/img/fondo.png',
-        '/img/fondo.png'
-      ],
-      destacada: false,
-      estado: 'Disponible'
-    }
-
-  ];
-
-
-  getPropiedades(): PropiedadModel[] {
-
-    return this.propiedades;
-
+  async getPropiedades(): Promise<PropiedadModel[]> {
+    return this.supabaseService.obtenerPropiedades();
   }
 
+  async getPropiedadesDestacadas(): Promise<PropiedadModel[]> {
+    const propiedades = await this.getPropiedades();
+    return propiedades.filter((p) => p.destacada).slice(0, 3);
+  }
 
-  getPropiedadesDestacadas(): PropiedadModel[] {
+  async getPropiedadesPorOperacion(operacion: PropiedadModel['operacion']): Promise<PropiedadModel[]> {
+    const propiedades = await this.getPropiedades();
+    return propiedades.filter((p) => p.operacion === operacion);
+  }
 
-    return this.propiedades.filter(
-      propiedad =>
-        propiedad.destacada &&
-        propiedad.estado === 'Disponible'
+  async getPropiedadPorId(id: string | number): Promise<PropiedadModel | undefined> {
+    return this.supabaseService.obtenerPropiedadPorId(id);
+  }
+
+  async agregarPropiedad(propiedad: Omit<PropiedadModel, 'id'>): Promise<PropiedadModel> {
+    return this.supabaseService.crearPropiedad(propiedad);
+  }
+
+  async eliminarPropiedad(id: string | number): Promise<void> {
+    await this.supabaseService.eliminarPropiedad(id);
+  }
+
+  async editarPropiedad(
+    id: string | number,
+    propiedad: Omit<PropiedadModel, 'id'>
+  ): Promise<PropiedadModel> {
+    return this.supabaseService.editarPropiedad(id, propiedad);
+  }
+
+  async subirImagen(
+    archivo: File,
+    propiedadId: string | number
+  ): Promise<string> {
+
+    return this.supabaseService.subirImagen(
+      archivo,
+      propiedadId
     );
-
   }
 
+  async registrarImagenPropiedad(
+    propiedadId: string | number,
+    url: string,
+    orden: number
+  ): Promise<void> {
 
-  getPropiedadesPorOperacion(
-    operacion: PropiedadModel['operacion']
-  ): PropiedadModel[] {
-
-    return this.propiedades.filter(
-      propiedad =>
-        propiedad.operacion === operacion &&
-        propiedad.estado === 'Disponible'
+    await this.supabaseService.registrarImagenPropiedad(
+      propiedadId,
+      url,
+      orden
     );
-
   }
 
+  async eliminarImagenPropiedad(
+    propiedadId: string | number,
+    url: string
+  ): Promise<void> {
 
-  getPropiedadPorId(id: number): PropiedadModel | undefined {
-
-    return this.propiedades.find(
-      propiedad => propiedad.id === id
+    await this.supabaseService.eliminarImagenPropiedad(
+      propiedadId,
+      url
     );
-
-  }
-
-  getTodas(): PropiedadModel[] {
-    return this.propiedades;
-  }
-
-  getTotal(): number {
-    return this.propiedades.length;
-  }
-
-  getTotalPorOperacion(
-    operacion: 'Venta' | 'Alquiler' | 'Anticres'
-  ): number {
-
-    return this.propiedades.filter(
-      propiedad => propiedad.operacion === operacion
-    ).length;
-
-  }
-
-  agregarPropiedad(
-    propiedad: PropiedadModel
-  ): void {
-
-    this.propiedades.push(propiedad);
-
   }
 
 }

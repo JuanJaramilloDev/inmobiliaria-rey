@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { Propiedad as PropiedadModel } from '../../models/propiedad.model';
@@ -21,58 +21,51 @@ export class Comprar implements OnInit {
   precioMaximo: number | null = null;
 
   constructor(
-    private propiedadService: PropiedadService
+    private propiedadService: PropiedadService,
+    private changeDetector: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) { }
 
-  ngOnInit(): void {
-
-    this.propiedades =
-      this.propiedadService.getPropiedadesPorOperacion('Venta');
-
+  async ngOnInit(): Promise<void> {
+    this.cargarFiltrosDeUrl();
+    await this.cargarPropiedades();
   }
 
-  buscar(): void {
+  async cargarPropiedades(): Promise<void> {
+    this.propiedades = await this.propiedadService.getPropiedadesPorOperacion('Venta');
+    this.aplicarFiltros();
+    this.changeDetector.detectChanges();
+  }
 
-    this.propiedades =
-      this.propiedadService.getPropiedadesPorOperacion('Venta');
+  private cargarFiltrosDeUrl(): void {
+    const parametros = this.route.snapshot.queryParamMap;
+    this.ubicacionFiltro = parametros.get('ubicacion') ?? '';
+    this.tipoFiltro = parametros.get('tipo') ?? '';
+    const precio = parametros.get('precio');
+    this.precioMaximo = precio ? Number(precio) : null;
+  }
 
+  private aplicarFiltros(): void {
     if (this.ubicacionFiltro.trim()) {
-
-      const ubicacion =
-        this.ubicacionFiltro.toLowerCase().trim();
-
-      this.propiedades = this.propiedades.filter(propiedad =>
-        propiedad.ubicacion.toLowerCase().includes(ubicacion)
-      );
-
+      const ubicacion = this.ubicacionFiltro.toLowerCase().trim();
+      this.propiedades = this.propiedades.filter(p => p.ubicacion.toLowerCase().includes(ubicacion));
     }
-
-    if (this.tipoFiltro) {
-
-      this.propiedades = this.propiedades.filter(propiedad =>
-        propiedad.tipo === this.tipoFiltro
-      );
-
-    }
-
-    if (this.precioMaximo !== null) {
-
-      this.propiedades = this.propiedades.filter(propiedad =>
-        propiedad.precio <= this.precioMaximo!
-      );
-
-    }
-
+    if (this.tipoFiltro) this.propiedades = this.propiedades.filter(p => p.tipo === this.tipoFiltro);
+    if (this.precioMaximo !== null) this.propiedades = this.propiedades.filter(p => p.precio <= this.precioMaximo!);
   }
 
-  limpiarFiltros(): void {
+  async buscar(): Promise<void> {
+
+    await this.cargarPropiedades();
+  }
+
+  async limpiarFiltros(): Promise<void> {
 
     this.ubicacionFiltro = '';
     this.tipoFiltro = '';
     this.precioMaximo = null;
 
-    this.propiedades =
-      this.propiedadService.getPropiedadesPorOperacion('Venta');
+    await this.cargarPropiedades();
 
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Location } from '@angular/common';
@@ -21,17 +21,17 @@ export class PropertyDetail implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private propiedadService: PropiedadService,
-    private location: Location
+    private location: Location,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
-    const id = Number(
-      this.route.snapshot.paramMap.get('id')
-    );
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) return;
 
-    this.propiedad =
-      this.propiedadService.getPropiedadPorId(id);
+    this.propiedad = await this.propiedadService.getPropiedadPorId(id);
+    this.changeDetector.detectChanges();
 
   }
 

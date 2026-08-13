@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   RouterLink,
   RouterLinkActive
@@ -15,5 +15,14 @@ import {
   styleUrl: './navbar.css'
 })
 export class Navbar {
+  menuAbierto = signal(false);
+
+  alternarMenu(): void {
+    this.menuAbierto.update((abierto) => !abierto);
+  }
+
+  cerrarMenu(): void {
+    this.menuAbierto.set(false);
+  }
 
 }

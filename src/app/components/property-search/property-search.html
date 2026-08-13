@@ -11,6 +11,8 @@
         <input
           type="text"
           placeholder="Ej. Pasto, Nariño"
+          name="ubicacion"
+          [(ngModel)]="ubicacion"
         >
       </div>
 
@@ -28,7 +30,7 @@
 
         <span>Tipo de propiedad</span>
 
-        <select>
+        <select name="tipo" [(ngModel)]="tipoPropiedad">
           <option value="">Todos</option>
           <option value="Casa">Casa</option>
           <option value="Apartamento">Apartamento</option>
@@ -53,11 +55,10 @@
 
         <span>Operación</span>
 
-        <select>
-          <option value="">Comprar o arriendo</option>
+        <select name="operacion" [(ngModel)]="operacion">
           <option value="Venta">Venta</option>
           <option value="Alquiler">Arriendo</option>
-          <option value="Arriendo">Anticres</option>
+          <option value="Anticres">Anticres</option>
         </select>
 
       </div>
@@ -65,7 +66,7 @@
     </div>
 
 
-    <button class="search-button">
+    <button type="button" class="search-button" (click)="buscar()">
 
       <i class="bi bi-search"></i>
 

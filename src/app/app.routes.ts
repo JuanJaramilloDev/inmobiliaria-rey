@@ -89,6 +89,12 @@ export const routes: Routes = [
       },
 
       {
+        path: 'crear-propiedad',
+        redirectTo: 'propiedades/crear-propiedad',
+        pathMatch: 'full'
+      },
+
+      {
         path: 'propiedades/editar/:id',
         loadComponent: () =>
           import('./pages/admin/editar-propiedad/editar-propiedad')

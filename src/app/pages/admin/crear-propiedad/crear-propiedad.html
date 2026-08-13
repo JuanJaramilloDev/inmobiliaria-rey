@@ -33,10 +33,7 @@
         Propiedades
       </a>
 
-      <a
-        routerLink="/admin/crear-propiedad"
-        class="active"
-      >
+      <a routerLink="/admin/crear-propiedad" class="active">
         <i class="bi bi-plus-circle"></i>
         Agregar propiedad
       </a>
@@ -79,10 +76,7 @@
       </div>
 
 
-      <a
-        routerLink="/admin/propiedades"
-        class="back-button"
-      >
+      <a routerLink="/admin/propiedades" class="back-button">
         <i class="bi bi-arrow-left"></i>
         Volver
       </a>
@@ -90,10 +84,7 @@
     </header>
 
 
-    <form
-      class="property-form"
-      (ngSubmit)="guardarPropiedad()"
-    >
+    <form class="property-form" (ngSubmit)="guardarPropiedad()">
 
 
       <!-- INFORMACIÓN -->
@@ -121,13 +112,8 @@
               Título de la propiedad *
             </label>
 
-            <input
-              type="text"
-              name="titulo"
-              [(ngModel)]="propiedad.titulo"
-              placeholder="Ej. Casa Moderna Norte"
-              required
-            >
+            <input type="text" name="titulo" [(ngModel)]="propiedad.titulo" placeholder="Ej. Casa Moderna Norte"
+              required>
 
           </div>
 
@@ -138,10 +124,7 @@
               Tipo de propiedad *
             </label>
 
-            <select
-              name="tipo"
-              [(ngModel)]="propiedad.tipo"
-            >
+            <select name="tipo" [(ngModel)]="propiedad.tipo">
 
               <option value="Casa">Casa</option>
               <option value="Apartamento">Apartamento</option>
@@ -160,10 +143,7 @@
               Operación *
             </label>
 
-            <select
-              name="operacion"
-              [(ngModel)]="propiedad.operacion"
-            >
+            <select name="operacion" [(ngModel)]="propiedad.operacion">
 
               <option value="Venta">
                 Venta
@@ -188,14 +168,8 @@
               Precio *
             </label>
 
-            <input
-              type="number"
-              name="precio"
-              [(ngModel)]="propiedad.precio"
-              placeholder="Ej. 350000000"
-              min="0"
-              required
-            >
+            <input type="number" name="precio" [(ngModel)]="propiedad.precio" placeholder="Ej. 350000000" min="0"
+              required>
 
           </div>
 
@@ -206,13 +180,8 @@
               Ubicación *
             </label>
 
-            <input
-              type="text"
-              name="ubicacion"
-              [(ngModel)]="propiedad.ubicacion"
-              placeholder="Ej. Pasto, Nariño"
-              required
-            >
+            <input type="text" name="ubicacion" [(ngModel)]="propiedad.ubicacion" placeholder="Ej. Pasto, Nariño"
+              required>
 
           </div>
 
@@ -246,12 +215,7 @@
               Habitaciones
             </label>
 
-            <input
-              type="number"
-              name="habitaciones"
-              [(ngModel)]="propiedad.habitaciones"
-              min="0"
-            >
+            <input type="number" name="habitaciones" [(ngModel)]="propiedad.habitaciones" min="0">
 
           </div>
 
@@ -262,12 +226,7 @@
               Baños
             </label>
 
-            <input
-              type="number"
-              name="banos"
-              [(ngModel)]="propiedad.banos"
-              min="0"
-            >
+            <input type="number" name="banos" [(ngModel)]="propiedad.banos" min="0">
 
           </div>
 
@@ -278,12 +237,7 @@
               Área (m²)
             </label>
 
-            <input
-              type="number"
-              name="area"
-              [(ngModel)]="propiedad.area"
-              min="0"
-            >
+            <input type="number" name="area" [(ngModel)]="propiedad.area" min="0">
 
           </div>
 
@@ -294,17 +248,87 @@
               Descripción *
             </label>
 
-            <textarea
-              name="descripcion"
-              [(ngModel)]="propiedad.descripcion"
-              rows="5"
-              placeholder="Describe las características de la propiedad..."
-              required
-            ></textarea>
+            <textarea name="descripcion" [(ngModel)]="propiedad.descripcion" rows="5"
+              placeholder="Describe las características de la propiedad..." required></textarea>
 
           </div>
 
         </div>
+
+      </section>
+
+      <section class="form-section">
+        <div class="form-title">
+          <i class="bi bi-check2-circle"></i>
+          <div>
+            <span>PUBLICACIÓN</span>
+            <h2>Estado de la propiedad</h2>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Estado *</label>
+            <select name="estado" [(ngModel)]="propiedad.estado" required>
+              <option value="Disponible">Disponible</option>
+              <option value="Vendida">Vendida</option>
+              <option value="Alquilada">Alquilada</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+
+        <div class="form-title">
+
+          <i class="bi bi-images"></i>
+
+          <div>
+            <span>IMÁGENES</span>
+            <h2>Fotos de la propiedad</h2>
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Seleccionar imágenes
+          </label>
+
+          <input type="file" accept="image/*" multiple (change)="seleccionarImagenes($event)">
+
+          <small>
+            Puede seleccionar varias imágenes.
+          </small>
+
+        </div>
+
+
+        @if (imagenesSeleccionadas.length > 0) {
+
+        <div class="selected-images">
+
+          @for (
+          imagen of imagenesSeleccionadas;
+          track imagen.name
+          ) {
+
+          <div class="selected-image">
+
+            <span>
+              {{ imagen.name }}
+            </span>
+
+          </div>
+
+          }
+
+        </div>
+
+        }
 
       </section>
 
@@ -315,11 +339,7 @@
 
         <label class="checkbox-container">
 
-          <input
-            type="checkbox"
-            name="destacada"
-            [(ngModel)]="propiedad.destacada"
-          >
+          <input type="checkbox" name="destacada" [(ngModel)]="propiedad.destacada">
 
           <span class="checkmark"></span>
 
@@ -344,18 +364,12 @@
 
       <div class="form-actions">
 
-        <a
-          routerLink="/admin/propiedades"
-          class="cancel-button"
-        >
+        <a routerLink="/admin/propiedades" class="cancel-button">
           Cancelar
         </a>
 
 
-        <button
-          type="submit"
-          class="save-button"
-        >
+        <button type="submit" class="save-button">
 
           <i class="bi bi-check-lg"></i>
 

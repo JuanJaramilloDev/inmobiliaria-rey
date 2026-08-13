@@ -184,13 +184,49 @@
 @media (max-width: 750px) {
 
   .navbar-container {
+    position: relative;
     min-height: 65px;
+    width: min(100% - 30px, 1250px);
   }
 
-  .nav-links,
   .whatsapp-button {
     display: none;
   }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% - 1px);
+    right: 0;
+    left: 0;
+    display: grid;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0 18px;
+    background: rgba(12, 14, 13, .99);
+    border: 1px solid transparent;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height .3s ease, opacity .2s ease, padding .3s ease;
+  }
+
+  .nav-links.open {
+    max-height: 480px;
+    padding: 8px 18px 16px;
+    border-color: rgba(212, 175, 55, .22);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    padding: 14px 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+    font-size: .73rem;
+  }
+
+  .nav-links a:last-child { border-bottom: 0; }
+  .nav-links a::after { right: auto; width: 28px; bottom: 8px; }
 
   .menu-button {
     display: flex;

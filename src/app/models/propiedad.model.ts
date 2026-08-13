@@ -1,5 +1,5 @@
 export interface Propiedad {
-  id: number;
+  id: string | number;
   titulo: string;
   tipo: 'Casa' | 'Apartamento' | 'Lote' | 'Local' | 'Oficina';
   operacion: 'Venta' | 'Alquiler' | 'Anticres';

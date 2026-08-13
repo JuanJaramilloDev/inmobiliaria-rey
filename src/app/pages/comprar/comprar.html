@@ -122,8 +122,12 @@
 
           <img [src]="propiedad.imagen [0]" [alt]="propiedad.titulo">
 
-          <span>
-            {{ propiedad.operacion }}
+          <span class="operation-badge">
+            {{ propiedad.tipo }}
+          </span>
+
+          <span class="property-state" [class.sold]="propiedad.estado === 'Vendida'" [class.rented]="propiedad.estado === 'Alquilada'">
+            {{ propiedad.estado }}
           </span>
 
         </div>

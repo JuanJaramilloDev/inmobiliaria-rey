@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -17,23 +17,20 @@ export class Propiedades implements OnInit {
   propiedades: PropiedadModel[] = [];
 
   constructor(
-    private propiedadService: PropiedadService
+    private propiedadService: PropiedadService,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
-
-    this.cargarPropiedades();
-
+  async ngOnInit(): Promise<void> {
+    await this.cargarPropiedades();
   }
 
-  cargarPropiedades(): void {
-
-    this.propiedades =
-      this.propiedadService.getPropiedades();
-
+  async cargarPropiedades(): Promise<void> {
+    this.propiedades = await this.propiedadService.getPropiedades();
+    this.changeDetector.detectChanges();
   }
 
-  eliminarPropiedad(id: number): void {
+  async eliminarPropiedad(id: string | number): Promise<void> {
 
     const confirmar = confirm(
       '¿Está seguro de eliminar esta propiedad?'
@@ -43,10 +40,17 @@ export class Propiedades implements OnInit {
       return;
     }
 
-    // Por ahora solo mostraremos el mensaje.
-    // Después conectaremos la eliminación real al servicio.
-
-    alert('La eliminación se conectará en el siguiente paso.');
+    try {
+      await this.propiedadService.eliminarPropiedad(id);
+      await this.cargarPropiedades();
+      alert('Propiedad eliminada correctamente.');
+    } catch (error) {
+      console.error(error);
+      const mensaje = typeof error === 'object' && error && 'message' in error
+        ? String(error.message)
+        : 'Error desconocido al eliminar la propiedad.';
+      alert(`No fue posible eliminar la propiedad: ${mensaje}`);
+    }
 
   }
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { Propiedad } from '../../../models/propiedad.model';
@@ -7,7 +8,7 @@ import { Propiedad as PropiedadService } from '../../../services/propiedad';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, DecimalPipe],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -19,36 +20,28 @@ export class Dashboard implements OnInit {
   totalAnticres = 0;
 
   propiedades: Propiedad[] = [];
+  ultimasPropiedades: Propiedad[] = [];
 
 
   constructor(
-    private propiedadService: PropiedadService
+    private propiedadService: PropiedadService,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
 
-  ngOnInit(): void {
-
-    this.cargarEstadisticas();
-
+  async ngOnInit(): Promise<void> {
+    await this.cargarEstadisticas();
   }
 
 
-  cargarEstadisticas(): void {
-
-    this.propiedades =
-      this.propiedadService.getTodas();
-
-    this.totalPropiedades =
-      this.propiedadService.getTotal();
-
-    this.totalVenta =
-      this.propiedadService.getTotalPorOperacion('Venta');
-
-    this.totalAlquiler =
-      this.propiedadService.getTotalPorOperacion('Alquiler');
-
-    this.totalAnticres =
-      this.propiedadService.getTotalPorOperacion('Anticres');
+  async cargarEstadisticas(): Promise<void> {
+    this.propiedades = await this.propiedadService.getPropiedades();
+    this.totalPropiedades = this.propiedades.length;
+    this.totalVenta = this.propiedades.filter(p => p.operacion === 'Venta').length;
+    this.totalAlquiler = this.propiedades.filter(p => p.operacion === 'Alquiler').length;
+    this.totalAnticres = this.propiedades.filter(p => p.operacion === 'Anticres').length;
+    this.ultimasPropiedades = [...this.propiedades].slice(-5).reverse();
+    this.changeDetector.detectChanges();
 
   }
 

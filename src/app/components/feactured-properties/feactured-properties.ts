@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Propiedad as PropiedadModel } from '../../models/propiedad.model';
 import { Propiedad as PropiedadService } from '../../services/propiedad';
 import { RouterLink } from '@angular/router';
@@ -16,14 +16,13 @@ export class FeacturedProperties implements OnInit {
   propiedades: PropiedadModel[] = [];
 
   constructor(
-    private propiedadService: PropiedadService
+    private propiedadService: PropiedadService,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
-
-    this.propiedades =
-      this.propiedadService.getPropiedadesDestacadas();
-
+  async ngOnInit(): Promise<void> {
+    this.propiedades = await this.propiedadService.getPropiedadesDestacadas();
+    this.changeDetector.detectChanges();
   }
 
 }

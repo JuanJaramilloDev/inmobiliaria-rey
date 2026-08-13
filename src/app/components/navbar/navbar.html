@@ -6,33 +6,33 @@
       REY INMOBILIARIA
     </a>
 
-    <div class="nav-links">
+    <div class="nav-links" [class.open]="menuAbierto()">
 
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="cerrarMenu()">
         Inicio
       </a>
 
-      <a routerLink="/comprar" routerLinkActive="active">
+      <a routerLink="/comprar" routerLinkActive="active" (click)="cerrarMenu()">
         Comprar
       </a>
 
-      <a routerLink="/vender" routerLinkActive="active">
-        Vender
-      </a>
-
-      <a routerLink="/alquilar" routerLinkActive="active">
+      <a routerLink="/alquilar" routerLinkActive="active" (click)="cerrarMenu()">
         Alquilar
       </a>
 
-      <a routerLink="/anticres" routerLinkActive="active">
+      <a routerLink="/anticres" routerLinkActive="active" (click)="cerrarMenu()">
         Anticres
       </a>
 
-      <a routerLink="/nosotros" routerLinkActive="active">
+      <a routerLink="/vender" routerLinkActive="active" (click)="cerrarMenu()">
+        Vender
+      </a>
+
+      <a routerLink="/nosotros" routerLinkActive="active" (click)="cerrarMenu()">
         Nosotros
       </a>
 
-      <a routerLink="/contacto" routerLinkActive="active">
+      <a routerLink="/contacto" routerLinkActive="active" (click)="cerrarMenu()">
         Contacto
       </a>
 
@@ -48,8 +48,8 @@
       <span>WhatsApp</span>
     </a>
 
-    <button class="menu-button">
-      <i class="bi bi-list"></i>
+    <button type="button" class="menu-button" (click)="alternarMenu()" [attr.aria-expanded]="menuAbierto()" aria-label="Abrir menú de navegación">
+      <i class="bi" [class.bi-list]="!menuAbierto()" [class.bi-x-lg]="menuAbierto()"></i>
     </button>
 
   </div>

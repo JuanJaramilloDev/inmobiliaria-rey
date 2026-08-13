@@ -317,6 +317,31 @@
     font-size: 0.8rem;
 }
 
+/* PROPIEDADES RECIENTES */
+.recent-properties { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+
+.recent-property {
+    position: relative; display: flex; gap: 15px; min-width: 0; padding: 14px;
+    background: #111413; border: 1px solid #292b28; color: inherit; text-decoration: none;
+    transition: border-color .25s ease, transform .25s ease;
+}
+
+.recent-property:hover { border-color: #d4af37; transform: translateY(-2px); }
+.recent-property img { width: 105px; height: 90px; object-fit: cover; background: #181b19; }
+.recent-property-info { min-width: 0; }
+.recent-property-tags { display: flex; gap: 6px; margin-bottom: 8px; }
+.type-badge, .state-badge { padding: 4px 7px; color: #111413; font-size: .53rem; font-weight: 800; letter-spacing: .7px; text-transform: uppercase; }
+.type-badge { background: #d4af37; }
+.state-badge { background: #77b98a; }
+.state-badge.sold { background: #d97474; }
+.state-badge.rented { background: #8bb7d9; }
+.recent-property h3 { overflow: hidden; margin: 0 20px 6px 0; color: #eeeeea; font-family: Georgia, serif; font-size: 1rem; text-overflow: ellipsis; white-space: nowrap; }
+.recent-property p { margin: 0 0 8px; color: #777a75; font-size: .67rem; }
+.recent-property p i, .recent-arrow { color: #d4af37; }
+.recent-property strong { color: #d4af37; font-size: .78rem; }
+.recent-property strong small { color: #a99a68; font-size: .58rem; }
+.recent-arrow { position: absolute; right: 14px; bottom: 14px; }
+
 
 /* RESPONSIVE */
 
@@ -356,7 +381,8 @@
     }
 
     .stats-grid,
-    .management-grid {
+    .management-grid,
+    .recent-properties {
         grid-template-columns: 1fr;
     }
 

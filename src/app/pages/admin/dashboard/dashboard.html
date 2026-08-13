@@ -262,18 +262,31 @@
             </div>
 
 
-            <div class="empty-state">
-
+            @if (ultimasPropiedades.length > 0) {
+              <div class="recent-properties">
+                @for (propiedad of ultimasPropiedades; track propiedad.id) {
+                  <a [routerLink]="['/propiedad', propiedad.id]" class="recent-property">
+                    <img [src]="propiedad.imagen[0]" [alt]="propiedad.titulo">
+                    <div class="recent-property-info">
+                      <div class="recent-property-tags">
+                        <span class="type-badge">{{ propiedad.tipo }}</span>
+                        <span class="state-badge" [class.sold]="propiedad.estado === 'Vendida'" [class.rented]="propiedad.estado === 'Alquilada'">{{ propiedad.estado }}</span>
+                      </div>
+                      <h3>{{ propiedad.titulo }}</h3>
+                      <p><i class="bi bi-geo-alt"></i> {{ propiedad.ubicacion }}</p>
+                      <strong>${{ propiedad.precio | number:'1.0-0' }} <small>COP</small></strong>
+                    </div>
+                    <i class="bi bi-arrow-up-right recent-arrow"></i>
+                  </a>
+                }
+              </div>
+            } @else {
+              <div class="empty-state">
                 <i class="bi bi-house"></i>
-
                 <h3>Propiedades registradas</h3>
-
-                <p>
-                    Desde aquí podrá administrar
-                    las propiedades de Rey Inmobiliaria.
-                </p>
-
-            </div>
+                <p>Desde aquí podrá administrar las propiedades de Rey Inmobiliaria.</p>
+              </div>
+            }
 
         </section>
 

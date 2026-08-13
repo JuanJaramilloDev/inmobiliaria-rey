@@ -11,8 +11,16 @@ import { WhatsappButton } from '../../components/whatsapp-button/whatsapp-button
   selector: 'app-home',
   standalone: true,
   imports: [Hero, PropertySearch, ServicesSection, FeacturedProperties, Footer, WhatsappButton],
-  templateUrl: './home.html',
-  styleUrl: './home.css'
+  // Se deja el template en línea para que el arranque SSR y el dev-server
+  // carguen Home sin requerir un resolvedor externo de recursos.
+  template: `
+    <app-hero></app-hero>
+    <app-property-search></app-property-search>
+    <app-services-section></app-services-section>
+    <app-feactured-properties></app-feactured-properties>
+    <app-footer></app-footer>
+    <app-whatsapp-button></app-whatsapp-button>
+  `
 })
 export class Home {
 
