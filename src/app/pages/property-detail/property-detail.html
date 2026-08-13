@@ -46,8 +46,7 @@
 
             <div class="gallery-thumbnails">
 
-                @for (
-                imagen of propiedad.imagen;
+                @for (imagen of propiedad.imagen;
                 track $index
                 ) {
 
@@ -82,24 +81,13 @@
                 </h1>
 
                 <p class="location">
-
                     <i class="bi bi-geo-alt"></i>
-
                     {{ propiedad.ubicacion }}
-
                 </p>
 
-
-                <div class="price">
-
-                    ${{ propiedad.precio }}
-
-                    <span>
-                        COP
-                    </span>
-
+                <div class="price">${{ propiedad.precio | number:'1.0-0' }}
+                    <span>COP</span>
                 </div>
-
 
                 <!-- CARACTERÍSTICAS -->
 

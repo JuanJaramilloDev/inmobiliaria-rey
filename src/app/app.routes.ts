@@ -82,7 +82,7 @@ export const routes: Routes = [
       },
 
       {
-        path: 'propiedades/nueva',
+        path: 'propiedades/crear-propiedad',
         loadComponent: () =>
           import('./pages/admin/crear-propiedad/crear-propiedad')
             .then(m => m.CrearPropiedad)

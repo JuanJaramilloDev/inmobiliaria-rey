@@ -1,1 +1,412 @@
-<p>propiedades works!</p>
+<section class="admin-page">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+      REY
+
+      <span>INMOBILIARIA</span>
+
+    </div>
+
+
+    <div class="admin-info">
+
+      <div class="admin-avatar">
+
+        <i class="bi bi-person"></i>
+
+      </div>
+
+      <div>
+
+        <strong>Administrador</strong>
+
+        <small>
+          Panel administrativo
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+      <a routerLink="/admin/dashboard">
+
+        <i class="bi bi-grid"></i>
+
+        Dashboard
+
+      </a>
+
+
+      <a
+        routerLink="/admin/propiedades"
+        class="active"
+      >
+
+        <i class="bi bi-buildings"></i>
+
+        Propiedades
+
+      </a>
+
+
+      <a routerLink="/admin/crear-propiedad">
+
+        <i class="bi bi-plus-circle"></i>
+
+        Agregar propiedad
+
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+      <a routerLink="/">
+
+        <i class="bi bi-box-arrow-up-right"></i>
+
+        Ver sitio web
+
+      </a>
+
+
+      <a routerLink="/admin/login">
+
+        <i class="bi bi-box-arrow-left"></i>
+
+        Cerrar sesión
+
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- CONTENIDO -->
+
+  <main class="admin-content">
+
+
+    <!-- HEADER -->
+
+    <header class="page-header">
+
+      <div>
+
+        <span>ADMINISTRACIÓN</span>
+
+        <h1>Propiedades</h1>
+
+        <p>
+          Administre las propiedades publicadas
+          en Rey Inmobiliaria.
+        </p>
+
+      </div>
+
+
+      <a
+        routerLink="/admin/propiedades/crear-propiedad"
+        class="add-button"
+      >
+
+        <i class="bi bi-plus-lg"></i>
+
+        Nueva propiedad
+
+      </a>
+
+    </header>
+
+
+    <!-- RESUMEN -->
+
+    <div class="properties-summary">
+
+      <div>
+
+        <span>Total propiedades</span>
+
+        <strong>
+          {{ propiedades.length }}
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>Venta</span>
+
+        <strong>
+
+          {{
+            propiedades.filter(
+              p => p.operacion === 'Venta'
+            ).length
+          }}
+
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>Alquiler</span>
+
+        <strong>
+
+          {{
+            propiedades.filter(
+              p => p.operacion === 'Alquiler'
+            ).length
+          }}
+
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>Anticres</span>
+
+        <strong>
+
+          {{
+            propiedades.filter(
+              p => p.operacion === 'Anticres'
+            ).length
+          }}
+
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- LISTADO -->
+
+    <section class="properties-section">
+
+      <div class="section-title">
+
+        <div>
+
+          <span>LISTADO</span>
+
+          <h2>
+            Propiedades registradas
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      @if (propiedades.length > 0) {
+
+        <div class="properties-list">
+
+          @for (
+            propiedad of propiedades;
+            track propiedad.id
+          ) {
+
+            <article class="property-row">
+
+
+              <!-- IMAGEN -->
+
+              <div class="property-image">
+
+                <img
+                  [src]="propiedad.imagen[0]"
+                  [alt]="propiedad.titulo"
+                >
+
+              </div>
+
+
+              <!-- INFORMACIÓN -->
+
+              <div class="property-info">
+
+                <span class="property-type">
+
+                  {{ propiedad.operacion }}
+
+                </span>
+
+
+                <h3>
+
+                  {{ propiedad.titulo }}
+
+                </h3>
+
+
+                <p>
+
+                  <i class="bi bi-geo-alt"></i>
+
+                  {{ propiedad.ubicacion }}
+
+                </p>
+
+
+                <strong>
+
+                  ${{ propiedad.precio | number:'1.0-0' }}
+
+                  <small>COP</small>
+
+                </strong>
+
+              </div>
+
+
+              <!-- DETALLES -->
+
+              <div class="property-details">
+
+                <span>
+
+                  <i class="bi bi-door-open"></i>
+
+                  {{ propiedad.habitaciones }}
+
+                  Hab.
+
+                </span>
+
+
+                <span>
+
+                  <i class="bi bi-droplet"></i>
+
+                  {{ propiedad.banos }}
+
+                  Baños
+
+                </span>
+
+
+                <span>
+
+                  <i class="bi bi-bounding-box"></i>
+
+                  {{ propiedad.area }}
+
+                  m²
+
+                </span>
+
+              </div>
+
+
+              <!-- ESTADO -->
+
+              <div class="property-status">
+
+                <span
+                  [class.available]="
+                    propiedad.estado === 'Disponible'
+                  "
+                >
+
+                  {{ propiedad.estado }}
+
+                </span>
+
+              </div>
+
+
+              <!-- ACCIONES -->
+
+              <div class="property-actions">
+
+                <a
+                  [routerLink]="[
+                    '/admin/editar-propiedad',
+                    propiedad.id
+                  ]"
+                  class="edit-button"
+                  title="Editar propiedad"
+                >
+
+                  <i class="bi bi-pencil"></i>
+
+                </a>
+
+
+                <button
+                  type="button"
+                  class="delete-button"
+                  title="Eliminar propiedad"
+                  (click)="eliminarPropiedad(propiedad.id)"
+                >
+
+                  <i class="bi bi-trash"></i>
+
+                </button>
+
+              </div>
+
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+
+      @if (propiedades.length === 0) {
+
+        <div class="empty-state">
+
+          <i class="bi bi-houses"></i>
+
+          <h2>
+            No hay propiedades
+          </h2>
+
+          <p>
+            Todavía no se han registrado propiedades.
+          </p>
+
+
+          <a
+            routerLink="/admin/crear-propiedad"
+            class="add-button"
+          >
+
+            <i class="bi bi-plus-lg"></i>
+
+            Agregar propiedad
+
+          </a>
+
+        </div>
+
+      }
+
+    </section>
+
+  </main>
+
+</section>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -8,10 +9,7 @@ import { Propiedad as PropiedadService } from '../../services/propiedad';
 @Component({
   selector: 'app-anticres',
   standalone: true,
-  imports: [
-    FormsModule,
-    RouterLink
-  ],
+  imports: [DecimalPipe, FormsModule, RouterLink],
   templateUrl: './anticres.html',
   styleUrl: './anticres.css'
 })

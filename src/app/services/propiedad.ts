@@ -130,4 +130,30 @@ export class Propiedad {
 
   }
 
+  getTodas(): PropiedadModel[] {
+    return this.propiedades;
+  }
+
+  getTotal(): number {
+    return this.propiedades.length;
+  }
+
+  getTotalPorOperacion(
+    operacion: 'Venta' | 'Alquiler' | 'Anticres'
+  ): number {
+
+    return this.propiedades.filter(
+      propiedad => propiedad.operacion === operacion
+    ).length;
+
+  }
+
+  agregarPropiedad(
+    propiedad: PropiedadModel
+  ): void {
+
+    this.propiedades.push(propiedad);
+
+  }
+
 }
