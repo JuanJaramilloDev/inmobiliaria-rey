@@ -167,9 +167,6 @@
               [alt]="propiedad.titulo"
             >
 
-            <span class="operation-badge">
-              {{ propiedad.tipo }}
-            </span>
 
             <span class="property-state" [class.sold]="propiedad.estado === 'Vendida'" [class.rented]="propiedad.estado === 'Alquilada'">
               {{ propiedad.estado }}
