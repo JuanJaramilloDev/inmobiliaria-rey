@@ -148,40 +148,6 @@
   background: #e1c15a;
 }
 
-.clear-button {
-  position: absolute;
-  right: 160px;
-  bottom: -38px;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  padding: 5px 0;
-
-  background: transparent;
-  border: none;
-
-  color: #777873;
-
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
-
-  cursor: pointer;
-
-  transition: color 0.3s ease;
-}
-
-.clear-button i {
-  color: #d4af37;
-}
-
-.clear-button:hover {
-  color: #d4af37;
-}
-
 /* GRID */
 
 .properties-grid {

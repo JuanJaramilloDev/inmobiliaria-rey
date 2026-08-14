@@ -12,7 +12,7 @@ export class Propiedad {
 
   async getPropiedadesDestacadas(): Promise<PropiedadModel[]> {
     const propiedades = await this.getPropiedades();
-    return propiedades.filter((p) => p.destacada).slice(0, 3);
+    return propiedades.slice(0, 3);
   }
 
   async getPropiedadesPorOperacion(operacion: PropiedadModel['operacion']): Promise<PropiedadModel[]> {

@@ -1,5 +1,6 @@
 .whatsapp-button {
   position: fixed;
+  transform: translateY(-15px);
 
   right: 25px;
   bottom: 25px;

@@ -7,7 +7,7 @@ import { DecimalPipe } from '@angular/common';
 @Component({
   selector: 'app-feactured-properties',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, RouterLink],
   templateUrl: './feactured-properties.html',
   styleUrl: './feactured-properties.css'
 })
@@ -24,5 +24,6 @@ export class FeacturedProperties implements OnInit {
     this.propiedades = await this.propiedadService.getPropiedadesDestacadas();
     this.changeDetector.detectChanges();
   }
+  
 
 }

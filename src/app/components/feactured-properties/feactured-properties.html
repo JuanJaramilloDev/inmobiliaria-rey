@@ -1,43 +1,7 @@
-<section class="featured-properties">
-  <div class="featured-container">
-    <div class="featured-header">
-      <div>
-        <span class="section-label">REY INMOBILIARIA</span>
-        <h2>Propiedades destacadas</h2>
-        <div class="title-line"></div>
-      </div>
-    </div>
-
-    <div class="properties-grid">
-      @for (propiedad of propiedades; track propiedad.id) {
-        <article class="property-card">
-          <div class="property-image">
-            <img [src]="propiedad.imagen[0]" [alt]="propiedad.titulo">
-            <span class="property-status"
-              [class.sale]="propiedad.operacion === 'Venta'"
-              [class.rent]="propiedad.operacion === 'Alquiler'"
-              [class.anticres]="propiedad.operacion === 'Anticres'">
-              {{ propiedad.tipo }}
-            </span>
-            <span class="property-state" [class.sold]="propiedad.estado === 'Vendida'" [class.rented]="propiedad.estado === 'Alquilada'">
-              {{ propiedad.estado }}
-            </span>
-          </div>
-
-          <div class="property-content">
-            <span class="property-type">{{ propiedad.tipo }}</span>
-            <h3>{{ propiedad.titulo }}</h3>
-            <div class="property-price">
-              ${{ propiedad.precio | number:'1.0-0':'es-CO' }} <span>COP</span>
-            </div>
-            <div class="property-details">
-              <span><i class="bi bi-door-open"></i>{{ propiedad.habitaciones }} Hab.</span>
-              <span><i class="bi bi-droplet"></i>{{ propiedad.banos }} Baños</span>
-              <span><i class="bi bi-bounding-box"></i>{{ propiedad.area }} m²</span>
-            </div>
-          </div>
-        </article>
-      }
-    </div>
-  </div>
-</section>
+<div class="logo-container">
+  <img
+    src="/img/logo.png"
+    alt="Rey Inmobiliaria"
+    class="logo"
+  >
+</div>
