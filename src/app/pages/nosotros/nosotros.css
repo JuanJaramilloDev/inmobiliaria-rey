@@ -137,28 +137,19 @@
 
 .purpose-main {
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
-
   gap: 15px;
 }
 
 
 .purpose-card {
   position: relative;
-
   min-height: 300px;
-
   display: flex;
-
   gap: 30px;
-
   padding: 40px 35px;
-
   background: #151817;
-
   border: 1px solid rgba(212, 175, 55, 0.18);
-
   overflow: hidden;
 
   transition:
@@ -166,10 +157,8 @@
     transform 0.3s ease;
 }
 
-
 .purpose-card:hover {
   transform: translateY(-4px);
-
   border-color: rgba(212, 175, 55, 0.5);
 }
 
@@ -203,7 +192,7 @@
 
   color: #d4af37;
 
-  font-size: 0.6rem;
+  font-size: 0.8rem;
 
   font-weight: 700;
 
@@ -231,7 +220,7 @@
 
   color: #777a76;
 
-  font-size: 0.72rem;
+  font-size: 1rem;
 
   line-height: 1.9;
 }
@@ -322,7 +311,7 @@
 
   color: #777a76;
 
-  font-size: 0.7rem;
+  font-size: 0.9rem;
 
   line-height: 1.8;
 }
@@ -394,7 +383,7 @@
 /* VALORES */
 
 .about-values {
-  padding: 30px 0 85px;
+  padding: 10px 0 85px;
 }
 
 .section-heading {
