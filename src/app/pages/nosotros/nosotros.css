@@ -103,11 +103,298 @@
     0 0 0 50px rgba(212, 175, 55, 0.015);
 }
 
+/* ==============================
+   MISIÓN / VISIÓN / OBJETIVOS
+   ============================== */
+
+.about-purpose {
+  padding: 90px 0 95px;
+}
+
+
+/* ENCABEZADO */
+
+.purpose-heading {
+  margin-bottom: 45px;
+}
+
+.purpose-heading h2 {
+  margin: 0;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 2.5rem;
+
+  font-weight: 400;
+
+  line-height: 1.15;
+}
+
+
+/* MISIÓN Y VISIÓN */
+
+.purpose-main {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+}
+
+
+.purpose-card {
+  position: relative;
+
+  min-height: 300px;
+
+  display: flex;
+
+  gap: 30px;
+
+  padding: 40px 35px;
+
+  background: #151817;
+
+  border: 1px solid rgba(212, 175, 55, 0.18);
+
+  overflow: hidden;
+
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.purpose-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+
+/* NÚMERO */
+
+.purpose-number {
+  flex-shrink: 0;
+
+  color: rgba(212, 175, 55, 0.25);
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 2.8rem;
+
+  line-height: 1;
+}
+
+
+/* CONTENIDO */
+
+.purpose-content {
+  max-width: 430px;
+}
+
+
+.purpose-label {
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: #d4af37;
+
+  font-size: 0.6rem;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+
+.purpose-content h3 {
+  margin: 0 0 20px;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 1.65rem;
+
+  font-weight: 400;
+
+  line-height: 1.2;
+}
+
+
+.purpose-content p {
+  margin: 0;
+
+  color: #777a76;
+
+  font-size: 0.72rem;
+
+  line-height: 1.9;
+}
+
+
+/* ==============================
+   OBJETIVOS
+   ============================== */
+
+.objectives {
+  margin-top: 15px;
+
+  padding: 40px 35px;
+
+  background: #111413;
+
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+
+.objectives-heading {
+  display: flex;
+
+  align-items: baseline;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding-bottom: 30px;
+
+  border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+
+.objectives-heading h3 {
+  margin: 0;
+
+  color: #f1f0eb;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 1.5rem;
+
+  font-weight: 400;
+}
+
+
+/* LISTA DE OBJETIVOS */
+
+.objectives-list {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  column-gap: 60px;
+
+  row-gap: 0;
+}
+
+
+.objective-item {
+  display: grid;
+
+  grid-template-columns: 35px 1fr;
+
+  align-items: start;
+
+  gap: 15px;
+
+  padding: 25px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+.objective-item span {
+  color: #d4af37;
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 0.85rem;
+}
+
+
+.objective-item p {
+  margin: 0;
+
+  color: #777a76;
+
+  font-size: 0.7rem;
+
+  line-height: 1.8;
+}
+
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+@media (max-width: 800px) {
+
+  .about-purpose {
+    padding: 75px 0;
+  }
+
+  .purpose-main {
+    grid-template-columns: 1fr;
+  }
+
+  .objectives-list {
+    grid-template-columns: 1fr;
+
+    column-gap: 0;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .purpose-heading h2 {
+    font-size: 2rem;
+  }
+
+  .purpose-card {
+    min-height: auto;
+
+    padding: 30px 25px;
+
+    gap: 20px;
+  }
+
+  .purpose-number {
+    font-size: 2rem;
+  }
+
+  .purpose-content h3 {
+    font-size: 1.35rem;
+  }
+
+  .objectives {
+    padding: 30px 25px;
+  }
+
+  .objectives-heading {
+    display: block;
+
+    padding-bottom: 20px;
+  }
+
+  .objectives-heading h3 {
+    margin-top: 10px;
+
+    font-size: 1.3rem;
+  }
+
+}
 
 /* VALORES */
 
 .about-values {
-  padding: 95px 0 85px;
+  padding: 30px 0 85px;
 }
 
 .section-heading {

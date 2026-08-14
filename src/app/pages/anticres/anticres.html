@@ -31,11 +31,7 @@
 
           <i class="bi bi-geo-alt"></i>
 
-          <input
-            type="text"
-            placeholder="Ciudad o sector"
-            [(ngModel)]="ubicacionFiltro"
-          >
+          <input type="text" placeholder="Ciudad o sector" [(ngModel)]="ubicacionFiltro">
 
         </div>
 
@@ -57,24 +53,16 @@
             <option value="">Todos</option>
 
             <option value="Casa">
-              Casa
+              Casas
             </option>
 
             <option value="Apartamento">
-              Apartamento
+              Apartamentos
             </option>
-
-            <option value="Lote">
-              Lote
-            </option>
-
-            <option value="Local">
-              Local
-            </option>
-
-            <option value="Oficina">
-              Oficina
-            </option>
+            <option value="Apartaestudios">Apartaestudios</option>
+            <option value="Lote">Lotes</option>
+            <option value="Local">Locales</option>
+            <option value="Oficina">Oficinas</option>
 
           </select>
 
@@ -124,11 +112,7 @@
 
       <!-- BUSCAR -->
 
-      <button
-        type="button"
-        class="filter-button"
-        (click)="buscar()"
-      >
+      <button type="button" class="filter-button" (click)="buscar()">
 
         <i class="bi bi-search"></i>
 
@@ -152,113 +136,108 @@
     <div class="properties-grid">
 
       @for (
-        propiedad of propiedades;
-        track propiedad.id
+      propiedad of propiedades;
+      track propiedad.id
       ) {
 
-        <article class="property-card">
+      <article class="property-card">
 
-          <!-- IMAGEN -->
+        <!-- IMAGEN -->
 
-          <div class="property-image">
+        <div class="property-image">
 
-            <img
-              [src]="propiedad.imagen[0]"
-              [alt]="propiedad.titulo"
-            >
+          <img [src]="propiedad.imagen[0]" [alt]="propiedad.titulo">
 
 
-            <span class="property-state" [class.sold]="propiedad.estado === 'Vendida'" [class.rented]="propiedad.estado === 'Alquilada'">
-              {{ propiedad.estado }}
+          <span class="property-state" [class.sold]="propiedad.estado === 'Vendida'"
+            [class.rented]="propiedad.estado === 'Alquilada'">
+            {{ propiedad.estado }}
+          </span>
+
+        </div>
+
+
+        <!-- INFORMACIÓN -->
+
+        <div class="property-content">
+
+          <small>
+            {{ propiedad.tipo }}
+          </small>
+
+          <h2>
+            {{ propiedad.titulo }}
+          </h2>
+
+
+          <p class="location">
+
+            <i class="bi bi-geo-alt"></i>
+
+            {{ propiedad.ubicacion }}
+
+          </p>
+
+
+          <strong>
+
+            ${{ propiedad.precio | number:'1.0-0' }}
+
+            <span>
+              COP
+            </span>
+
+          </strong>
+
+
+          <div class="details">
+
+            <span>
+
+              <i class="bi bi-door-open"></i>
+
+              {{ propiedad.habitaciones }}
+              Hab.
+
+            </span>
+
+
+            <span>
+
+              <i class="bi bi-droplet"></i>
+
+              {{ propiedad.banos }}
+              Baños
+
+            </span>
+
+
+            <span>
+
+              <i class="bi bi-bounding-box"></i>
+
+              {{ propiedad.area }}
+              m²
+
             </span>
 
           </div>
 
 
-          <!-- INFORMACIÓN -->
-
-          <div class="property-content">
-
-            <small>
-              {{ propiedad.tipo }}
-            </small>
-
-            <h2>
-              {{ propiedad.titulo }}
-            </h2>
-
-
-            <p class="location">
-
-              <i class="bi bi-geo-alt"></i>
-
-              {{ propiedad.ubicacion }}
-
-            </p>
-
-
-            <strong>
-
-              ${{ propiedad.precio | number:'1.0-0' }}
-
-              <span>
-                COP
-              </span>
-
-            </strong>
-
-
-            <div class="details">
-
-              <span>
-
-                <i class="bi bi-door-open"></i>
-
-                {{ propiedad.habitaciones }}
-                Hab.
-
-              </span>
-
-
-              <span>
-
-                <i class="bi bi-droplet"></i>
-
-                {{ propiedad.banos }}
-                Baños
-
-              </span>
-
-
-              <span>
-
-                <i class="bi bi-bounding-box"></i>
-
-                {{ propiedad.area }}
-                m²
-
-              </span>
-
-            </div>
-
-
-            <a
-              [routerLink]="[
+          <a [routerLink]="[
                 '/propiedad',
                 propiedad.id
-              ]"
-              class="details-button"
-            >
+              ]" class="details-button">
 
-              Ver propiedad
+            Ver propiedad
 
-              <i class="bi bi-arrow-right"></i>
+            <i class="bi bi-arrow-right"></i>
 
-            </a>
+          </a>
 
-          </div>
+        </div>
 
-        </article>
+      </article>
 
       }
 
@@ -269,20 +248,20 @@
 
     @if (propiedades.length === 0) {
 
-      <div class="no-properties">
+    <div class="no-properties">
 
-        <i class="bi bi-house-x"></i>
+      <i class="bi bi-house-x"></i>
 
-        <h2>
-          No hay propiedades disponibles
-        </h2>
+      <h2>
+        No hay propiedades disponibles
+      </h2>
 
-        <p>
-          Actualmente no tenemos propiedades
-          disponibles en anticres.
-        </p>
+      <p>
+        Actualmente no tenemos propiedades
+        disponibles en anticres.
+      </p>
 
-      </div>
+    </div>
 
     }
 
