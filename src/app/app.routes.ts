@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './pages/guards/guards';
 
 export const routes: Routes = [
 
@@ -51,7 +52,20 @@ export const routes: Routes = [
   {
     path: 'propiedad/:id',
     loadComponent: () =>
-      import('./pages/property-detail/property-detail').then(m => m.PropertyDetail)
+      import('./pages/property-detail/property-detail')
+        .then(m => m.PropertyDetail)
+  },
+
+
+  // =========================
+  // LOGIN
+  // =========================
+
+  {
+    path: 'admin/login',
+    loadComponent: () =>
+      import('./pages/admin/login/login')
+        .then(m => m.Login)
   },
 
 
@@ -61,24 +75,21 @@ export const routes: Routes = [
 
   {
     path: 'admin',
+    canActivate: [authGuard],
     children: [
-
-      {
-        path: 'login',
-        loadComponent: () =>
-          import('./pages/admin/login/login').then(m => m.Login)
-      },
 
       {
         path: 'dashboard',
         loadComponent: () =>
-          import('./pages/admin/dashboard/dashboard').then(m => m.Dashboard)
+          import('./pages/admin/dashboard/dashboard')
+            .then(m => m.Dashboard)
       },
 
       {
         path: 'propiedades',
         loadComponent: () =>
-          import('./pages/admin/propiedades/propiedades').then(m => m.Propiedades)
+          import('./pages/admin/propiedades/propiedades')
+            .then(m => m.Propiedades)
       },
 
       {

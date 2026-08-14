@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { environment } from '../../environments/environment';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { Propiedad } from '../models/propiedad.model';
+import { SupabaseClientService } from './supabase-client';
+import { environment } from '../../environments/environment';
 
 type NuevaPropiedad = Omit<Propiedad, 'id'>;
 
@@ -9,8 +10,10 @@ type NuevaPropiedad = Omit<Propiedad, 'id'>;
 export class SupabaseService {
   private supabase: SupabaseClient;
 
-  constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+  constructor(
+    private supabaseService: SupabaseClientService
+  ) {
+    this.supabase = this.supabaseService.client;
   }
 
   async obtenerPropiedades(): Promise<Propiedad[]> {
@@ -95,6 +98,16 @@ export class SupabaseService {
   }
 
   async crearPropiedad(propiedad: NuevaPropiedad): Promise<Propiedad> {
+
+    const { data: sessionData, error: sessionError } =
+      await this.supabase.auth.getSession();
+
+    console.log('SESION ANTES DE INSERTAR:', sessionData.session);
+    console.log('ERROR DE SESION:', sessionError);
+
+    if (!sessionData.session) {
+      throw new Error('No hay una sesión activa en Supabase.');
+    }
 
     const registro = {
       titulo: propiedad.titulo,
@@ -250,7 +263,7 @@ export class SupabaseService {
     if (errorPropiedad) {
 
       console.error(
-        'Error eliminando propiedad:',errorPropiedad
+        'Error eliminando propiedad:', errorPropiedad
       );
 
       throw errorPropiedad;

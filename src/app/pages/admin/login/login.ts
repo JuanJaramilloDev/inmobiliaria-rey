@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -15,23 +15,45 @@ export class Login {
   usuario = '';
   password = '';
 
-  constructor(private router: Router) {}
+  cargando = false;
 
-  iniciarSesion(): void {
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-    if (
-      this.usuario === 'admin' &&
-      this.password === '123456'
-    ) {
+  async iniciarSesion(): Promise<void> {
 
-      this.router.navigate(['/admin/dashboard']);
-
-    } else {
-
-      alert('Usuario o contraseña incorrectos');
-
+    if (!this.usuario.trim() || !this.password.trim()) {
+      alert('Ingrese el correo y la contraseña.');
+      return;
     }
 
+    this.cargando = true;
+
+    try {
+
+      await this.authService.iniciarSesion(
+        this.usuario,
+        this.password
+      );
+
+      await this.router.navigate(['/admin/dashboard']);
+
+    } catch (error: any) {
+
+      console.error('Error iniciando sesión:', error);
+
+      alert(
+        error?.message ||
+        'Correo o contraseña incorrectos.'
+      );
+
+    } finally {
+
+      this.cargando = false;
+
+    }
   }
 
 }

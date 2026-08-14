@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { AuthService } from '../../../services/auth';
 
 import { Propiedad } from '../../../models/propiedad.model';
 import { Propiedad as PropiedadService } from '../../../services/propiedad';
@@ -24,9 +25,11 @@ export class Dashboard implements OnInit {
 
 
   constructor(
+    private authService: AuthService,
     private propiedadService: PropiedadService,
-    private changeDetector: ChangeDetectorRef
-  ) {}
+    private changeDetector: ChangeDetectorRef,
+    private router: Router
+  ) { }
 
 
   async ngOnInit(): Promise<void> {
@@ -42,6 +45,24 @@ export class Dashboard implements OnInit {
     this.totalAnticres = this.propiedades.filter(p => p.operacion === 'Anticres').length;
     this.ultimasPropiedades = [...this.propiedades].slice(-5).reverse();
     this.changeDetector.detectChanges();
+
+  }
+
+  async cerrarSesion(): Promise<void> {
+
+    try {
+
+      await this.authService.cerrarSesion();
+
+      this.router.navigate(['/admin/login']);
+
+    } catch (error) {
+
+      console.error('Error cerrando sesión:', error);
+
+      alert('No fue posible cerrar la sesión.');
+
+    }
 
   }
 
